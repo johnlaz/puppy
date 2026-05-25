@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐾 Operation Puppy Brother</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2c6fad;
+  --blue-light:#e8f2fb;
+  --green:#2a7d4f;
+  --green-light:#e6f4ed;
+  --amber:#b45309;
+  --amber-light:#fef3c7;
+  --red:#c0392b;
+  --bg:#f4f6f9;
+  --white:#ffffff;
+  --text:#1a202c;
+  --muted:#64748b;
+  --border:#dde3ed;
+  --radius:12px;
+  --shadow:0 2px 16px rgba(0,0,0,0.07);
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:16px}
+
+/* MISSION BANNER */
+.mission-banner{background:linear-gradient(135deg,#1a3a5c 0%,#2c6fad 60%,#1e6b4f 100%);color:white;padding:0.35rem 1rem;text-align:center;font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:0.5rem}
+.mission-banner span{opacity:0.8}
+
+/* HEADER */
+header{background:linear-gradient(160deg,#1a3a5c 0%,#2c6fad 100%);color:white;text-align:center;padding:2.5rem 1rem 2rem}
+header h1{font-family:'Playfair Display',serif;font-size:2.4rem;line-height:1.2;margin-bottom:0.4rem}
+header p{font-size:1rem;opacity:0.85;max-width:480px;margin:0 auto}
+
+/* CONTAINER */
+.container{max-width:860px;margin:0 auto;padding:1.75rem 1rem 4rem}
+
+/* SECTION CARDS */
+.card{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);margin-bottom:1.75rem;overflow:hidden}
+.card-head{padding:1.25rem 1.5rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.75rem}
+.card-head h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:#1a3a5c}
+.card-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.card-body{padding:1.25rem 1.5rem}
+
+/* STEP NUMBERS */
+.step-num{background:#1a3a5c;color:white;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;flex-shrink:0}
+
+/* INPUT GROUP */
+.input-group{margin-bottom:1rem}
+.input-group label{display:block;font-weight:600;font-size:0.88rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.4rem}
+.input-group input{width:100%;padding:0.7rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;color:var(--text);transition:border-color 0.2s;background:white}
+.input-group input:focus{outline:none;border-color:var(--blue)}
+
+/* ROUTE BUTTONS */
+.route-btns{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:1rem}
+.btn-route{padding:0.85rem 1rem;border:none;border-radius:8px;font-size:0.95rem;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:inherit}
+.btn-route-a{background:#1a3a5c;color:white}
+.btn-route-a:hover{background:#153051}
+.btn-route-b{background:var(--blue);color:white}
+.btn-route-b:hover{background:#2460a0}
+
+/* TABS */
+.tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:1.25rem}
+.tab{flex:1;padding:0.85rem 0.5rem;text-align:center;font-weight:600;font-size:0.9rem;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all 0.2s}
+.tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+
+/* TAB CONTENT */
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* SECTION DIVIDERS */
+.dir-label{display:flex;align-items:center;gap:0.6rem;margin:1.25rem 0 0.85rem}
+.dir-label span{font-weight:700;font-size:0.92rem;color:#1a3a5c}
+.dir-badge{font-size:0.72rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:20px;text-transform:uppercase;letter-spacing:0.05em}
+.badge-human{background:var(--blue-light);color:var(--blue)}
+.badge-pet{background:var(--green-light);color:var(--green)}
+.badge-food{background:var(--amber-light);color:var(--amber)}
+
+/* EXP CARDS */
+.exp-card{border:1px solid var(--border);border-radius:10px;margin-bottom:0.85rem;overflow:hidden}
+.exp-card-top{padding:1rem 1.1rem 0.75rem}
+.exp-card-top h3{font-size:1rem;font-weight:700;margin-bottom:0.3rem;color:var(--text)}
+.exp-card-top p{font-size:0.9rem;color:var(--muted);margin-bottom:0.6rem;line-height:1.5}
+.maps-btn{display:inline-flex;align-items:center;gap:0.4rem;background:#e8f2fb;color:var(--blue);border:none;padding:0.45rem 0.9rem;border-radius:6px;font-size:0.85rem;font-weight:600;cursor:pointer;text-decoration:none;font-family:inherit;transition:background 0.2s}
+.maps-btn:hover{background:#d0e6f7}
+.maps-btn svg{width:14px;height:14px;flex-shrink:0}
+
+/* RESTAURANT CARDS */
+.rest-card{border:1px solid var(--border);border-radius:10px;margin-bottom:0.75rem;padding:1rem 1.1rem}
+.rest-card h3{font-size:1rem;font-weight:700;margin-bottom:0.2rem}
+.rest-card .cuisine{font-size:0.8rem;font-weight:600;color:var(--amber);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.35rem}
+.rest-card p{font-size:0.88rem;color:var(--muted);margin-bottom:0.55rem;line-height:1.5}
+.rest-card .paw{font-size:0.8rem;color:var(--green);font-weight:600;display:flex;align-items:center;gap:0.3rem;margin-bottom:0.5rem}
+
+/* CHECKLIST */
+.checklist{list-style:none}
+.checklist li{display:flex;align-items:flex-start;gap:0.7rem;padding:0.6rem 0;border-bottom:1px solid #f0f3f8;font-size:0.93rem}
+.checklist li:last-child{border-bottom:none}
+.check-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;flex-shrink:0;margin-top:1px}
+.check-blue{background:var(--blue-light);color:var(--blue)}
+.check-green{background:var(--green-light);color:var(--green)}
+.check-amber{background:var(--amber-light);color:var(--amber)}
+
+/* EMERGENCY / INFO BOX */
+.info-box{border-radius:8px;padding:1rem 1.1rem;margin-bottom:1rem;font-size:0.9rem}
+.info-box-blue{background:var(--blue-light);border:1px solid #bee3fb}
+.info-box-green{background:var(--green-light);border:1px solid #b7deca}
+.info-box-amber{background:var(--amber-light);border:1px solid #fcd34d}
+.info-box-red{background:#fef2f2;border:1px solid #fecaca}
+.info-box h4{font-weight:700;font-size:0.88rem;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.4rem}
+.info-box-blue h4{color:var(--blue)}
+.info-box-green h4{color:var(--green)}
+.info-box-amber h4{color:var(--amber)}
+.info-box-red h4{color:var(--red)}
+.info-box p,.info-box li{color:var(--text);line-height:1.5}
+.info-box ul{padding-left:1.1rem;margin-top:0.3rem}
+.info-box ul li{margin-bottom:0.2rem}
+
+/* PHONE LINKS */
+.phone-link{color:var(--blue);font-weight:600;text-decoration:none}
+.phone-link:hover{text-decoration:underline}
+
+/* QUICK NAV */
+.quick-nav{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:1.75rem;padding:1rem 1.5rem}
+.quick-nav h3{font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:0.75rem}
+.nav-links{display:flex;flex-wrap:wrap;gap:0.5rem}
+.nav-link{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:0.35rem 0.85rem;font-size:0.85rem;font-weight:600;color:#1a3a5c;text-decoration:none;transition:all 0.2s;cursor:pointer}
+.nav-link:hover{background:#1a3a5c;color:white;border-color:#1a3a5c}
+
+/* FOOTER */
+footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.85rem}
+
+/* RESPONSIVE */
+@media(max-width:560px){
+  header h1{font-size:1.7rem}
+  .route-btns{grid-template-columns:1fr}
+  .tabs{font-size:0.82rem}
+  .card-body{padding:1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- MISSION BANNER -->
+<div class="mission-banner">
+  <span>🐾</span>
+  <span>Operation Puppy Brother — Top Secret Family Mission</span>
+  <span>🐾</span>
+</div>
+
+<!-- HEADER -->
+<header>
+  <h1>🗺️ Mom & Dad's Road Trip Guide</h1>
+  <p>Everything you need for the whole trip — from leaving home to arriving back with your new furry family member.</p>
+</header>
+
+<div class="container">
+
+  <!-- QUICK NAV -->
+  <div class="quick-nav">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;margin-bottom:0.75rem">
+      <h3 style="margin-bottom:0">Jump to a section</h3>
+      <button onclick="downloadGuide()" style="display:flex;align-items:center;gap:0.45rem;background:#1a3a5c;color:white;border:none;padding:0.45rem 1rem;border-radius:20px;font-size:0.85rem;font-weight:600;cursor:pointer;font-family:inherit;transition:background 0.2s" onmouseover="this.style.background='#153051'" onmouseout="this.style.background='#1a3a5c'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Save to Desktop
+      </button>
+    </div>
+    <div class="nav-links">
+      <span class="nav-link" onclick="jumpTo('sec-route')">🧭 Route</span>
+      <span class="nav-link" onclick="jumpTo('sec-drivetimes')">⏱️ Drive Times</span>
+      <span class="nav-link" onclick="jumpTo('sec-overnight')">🏨 Overnight Stop</span>
+      <span class="nav-link" onclick="jumpTo('sec-restaurants')">🍽️ Where to Eat</span>
+      <span class="nav-link" onclick="jumpTo('sec-gas')">⛽ Gas Stops</span>
+      <span class="nav-link" onclick="jumpTo('sec-packing')">🎒 Packing List</span>
+      <span class="nav-link" onclick="jumpTo('sec-puppy')">🐶 Puppy Tips</span>
+      <span class="nav-link" onclick="jumpTo('sec-breeder')">🏡 At the Breeder</span>
+      <span class="nav-link" onclick="jumpTo('sec-emergency')">🚨 Emergency Info</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: ROUTE -->
+  <div class="card" id="sec-route">
+    <div class="card-head">
+      <div class="card-icon" style="background:#e8f2fb;font-size:1.3rem">🧭</div>
+      <div class="step-num">1</div>
+      <h2>Open Your Driving Directions</h2>
+    </div>
+    <div class="card-body">
+      <p style="color:var(--muted);font-size:0.93rem;margin-bottom:1.25rem">Just tap one of the buttons below and Google Maps will open on your phone with the whole route ready to go — no typing needed.</p>
+      <div class="input-group">
+        <label>Your Home Address (Starting Point)</label>
+        <input type="text" id="start-addr" value="Fort Lauderdale, FL" placeholder="e.g. Fort Lauderdale, FL">
+      </div>
+      <div class="input-group">
+        <label>Puppy Pick-Up Address (End Point)</label>
+        <input type="text" id="end-addr" value="North Carolina" placeholder="e.g. Brevard, NC">
+      </div>
+      <div class="route-btns">
+        <button class="btn-route btn-route-a" onclick="launchRoute('Walterboro, SC')">
+          🌿 Route via Walterboro, SC
+        </button>
+        <button class="btn-route btn-route-b" onclick="launchRoute('Santee, SC')">
+          🌊 Route via Santee, SC
+        </button>
+      </div>
+      <div class="info-box info-box-blue" style="margin-top:1.1rem">
+        <h4>💡 How to use this</h4>
+        <p>Tap a button above. Google Maps will open. Press <strong>Start</strong> and follow the voice directions — it will guide you the whole way including the overnight stop.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: DRIVE TIMES -->
+  <div class="card" id="sec-drivetimes">
+    <div class="card-head">
+      <div class="card-icon" style="background:#fef3c7;font-size:1.3rem">&#9201;</div>
+      <div class="step-num">2</div>
+      <h2>Drive Times at a Glance</h2>
+    </div>
+    <div class="card-body">
+      <p style="color:var(--muted);font-size:0.93rem;margin-bottom:1.25rem">Here is how the whole trip breaks down. Times are driving only, not counting stops.</p>
+      <div style="margin-bottom:1.5rem">
+        <div style="font-weight:700;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--blue);margin-bottom:0.75rem">Heading North to Pick Up the Puppy</div>
+        <div style="display:grid;gap:0.5rem">
+          <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:#f8fafc;border:1px solid var(--border);border-radius:8px">
+            <span style="font-size:1.3rem">&#127968;</span>
+            <div style="flex:1"><div style="font-weight:600;font-size:0.95rem">Fort Lauderdale, FL</div><div style="font-size:0.82rem;color:var(--muted)">Home &mdash; Starting Point</div></div>
+          </div>
+          <div style="text-align:center;color:var(--muted);font-size:0.85rem;padding:0.1rem 0">about <strong style="color:var(--text)">5 hrs 45 min</strong> &nbsp;&middot;&nbsp; ~380 miles</div>
+          <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:var(--green-light);border:1px solid #b7deca;border-radius:8px">
+            <span style="font-size:1.3rem">&#127807;</span>
+            <div style="flex:1"><div style="font-weight:600;font-size:0.95rem">Walterboro or Santee, SC</div><div style="font-size:0.82rem;color:var(--muted)">Overnight Stop &mdash; Rest Here</div></div>
+            <span style="background:var(--green);color:white;font-size:0.72rem;font-weight:700;padding:0.2rem 0.55rem;border-radius:12px">SLEEP</span>
+          </div>
+          <div style="text-align:center;color:var(--muted);font-size:0.85rem;padding:0.1rem 0">about <strong style="color:var(--text)">3 hrs 30 min &ndash; 4 hrs</strong> &nbsp;&middot;&nbsp; ~220 miles</div>
+          <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:var(--blue-light);border:1px solid #bee3fb;border-radius:8px">
+            <span style="font-size:1.3rem">&#128062;</span>
+            <div style="flex:1"><div style="font-weight:600;font-size:0.95rem">North Carolina &mdash; Breeder</div><div style="font-size:0.82rem;color:var(--muted)">Destination &mdash; Pick Up the Puppy!</div></div>
+            <span style="background:var(--blue);color:white;font-size:0.72rem;font-weight:700;padding:0.2rem 0.55rem;border-radius:12px">GOAL</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:700;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--green);margin-bottom:0.75rem">Heading Home with the Puppy</div>
+        <div style="display:grid;gap:0.5rem">
+          <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:#f8fafc;border:1px solid var(--border);border-radius:8px">
+            <span style="font-size:1.3rem">&#128062;</span>
+            <div style="flex:1"><div style="font-weight:600;font-size:0.95rem">North Carolina &mdash; Breeder</div><div style="font-size:0.82rem;color:var(--muted)">Starting Point (with puppy!)</div></div>
+          </div>
+          <div style="text-align:center;color:var(--muted);font-size:0.85rem;padding:0.1rem 0">about <strong style="color:var(--text)">3 hrs 30 min &ndash; 4 hrs</strong> &nbsp;&middot;&nbsp; ~220 miles</div>
+          <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:var(--green-light);border:1px solid #b7deca;border-radius:8px">
+            <span style="font-size:1.3rem">&#127807;</span>
+            <div style="flex:1"><div style="font-weight:600;font-size:0.95rem">Walterboro or Santee, SC</div><div style="font-size:0.82rem;color:var(--muted)">Overnight Stop &mdash; Rest Here with Puppy</div></div>
+            <span style="background:var(--green);color:white;font-size:0.72rem;font-weight:700;padding:0.2rem 0.55rem;border-radius:12px">SLEEP</span>
+          </div>
+          <div style="text-align:center;color:var(--muted);font-size:0.85rem;padding:0.1rem 0">about <strong style="color:var(--text)">5 hrs 45 min</strong> &nbsp;&middot;&nbsp; ~380 miles</div>
+          <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:#fef3c7;border:1px solid #fcd34d;border-radius:8px">
+            <span style="font-size:1.3rem">&#127968;</span>
+            <div style="flex:1"><div style="font-weight:600;font-size:0.95rem">Fort Lauderdale, FL</div><div style="font-size:0.82rem;color:var(--muted)">Home &mdash; Mission Complete!</div></div>
+            <span style="background:var(--amber);color:white;font-size:0.72rem;font-weight:700;padding:0.2rem 0.55rem;border-radius:12px">HOME</span>
+          </div>
+        </div>
+      </div>
+      <div class="info-box info-box-amber" style="margin-top:1.1rem">
+        <h4>Total Trip Time</h4>
+        <p>Each direction is roughly <strong>9.5 to 10 hours of driving</strong>, split comfortably over 2 days with an overnight stop. Add 30 min per rest or meal stop &mdash; plan for 2 to 3 stops each day.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: OVERNIGHT STOP -->
+  <div class="card" id="sec-overnight">
+    <div class="card-head">
+      <div class="card-icon" style="background:#e6f4ed;font-size:1.3rem">🏨</div>
+      <div class="step-num">3</div>
+      <h2>Choose Your Overnight Stop</h2>
+    </div>
+    <div class="card-body">
+      <p style="color:var(--muted);font-size:0.93rem;margin-bottom:1.25rem">Both are located right at the 6-hour mark on I-95. Pick the vibe you prefer!</p>
+
+      <div class="tabs">
+        <div class="tab active" id="tab-walterboro" onclick="switchTab('walterboro')">Option A: Walterboro, SC</div>
+        <div class="tab" id="tab-santee" onclick="switchTab('santee')">Option B: Santee, SC</div>
+      </div>
+
+      <!-- WALTERBORO -->
+      <div id="content-walterboro" class="tab-content active">
+        <div class="info-box info-box-blue" style="margin-bottom:1.1rem">
+          <h4>🌿 About Walterboro</h4>
+          <p>A gorgeous, quiet Lowcountry town with Spanish-moss-draped avenues, historic Southern architecture, and a peaceful small-town feel. Perfect for a relaxed overnight.</p>
+        </div>
+
+        <div class="dir-label">
+          <span>Heading North (Going to get the puppy)</span>
+          <span class="dir-badge badge-human">No puppy yet</span>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-card-top">
+            <h3>SC Artisans Center</h3>
+            <p>The state's official folk art gallery — cool, air-conditioned, and beautiful. Handmade local pottery, glasswork, and Southern textiles. A wonderful way to stretch your legs in a peaceful, elegant setting.</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=South+Carolina+Artisans+Center+Walterboro+SC" target="_blank" class="maps-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Open in Maps
+            </a>
+          </div>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-card-top">
+            <h3>Where to Stay</h3>
+            <p>The <strong>Hampton Inn & Suites Walterboro</strong> at Exit 53 is clean, quiet, and reliable — no surprises. If you'd prefer something with more charm, search Airbnb for historic cottages like <em>Eden at Gracefield</em>.</p>
+            <div style="display:flex;gap:0.6rem;flex-wrap:wrap">
+              <a href="https://www.google.com/maps/search/?api=1&query=Hampton+Inn+Walterboro+SC" target="_blank" class="maps-btn">&#128205; Hampton Inn</a>
+              <a href="tel:18436454000" class="maps-btn" style="background:#e6f4ed;color:var(--green)">&#128222; Call Hampton Inn</a>
+              <a href="https://www.airbnb.com/s/Walterboro--South-Carolina--United-States/homes" target="_blank" class="maps-btn">&#127968; Airbnb Options</a>
+              <a href="https://forecast.weather.gov/MapClick.php?CityName=Walterboro&state=SC&site=CHS&textField1=32.9049&textField2=-80.6698" target="_blank" class="maps-btn" style="background:#fef3c7;color:var(--amber)">&#9925; Walterboro Weather</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="dir-label">
+          <span>Heading Home (Puppy is with you now!)</span>
+          <span class="dir-badge badge-pet">🐾 Puppy-friendly</span>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-card-top">
+            <h3>Walterboro Wildlife Sanctuary</h3>
+            <p>Miles of smooth, elevated boardwalk trails winding over a stunning cypress swamp. Completely shaded, very low-key, and leash-friendly. A magical first outdoor experience for a new puppy.</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Walterboro+Wildlife+Sanctuary+SC" target="_blank" class="maps-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Open in Maps
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SANTEE -->
+      <div id="content-santee" class="tab-content">
+        <div class="info-box info-box-blue" style="margin-bottom:1.1rem">
+          <h4>🌊 About Santee</h4>
+          <p>Situated right on the banks of Lake Marion — one of South Carolina's largest lakes. Beautiful waterfront views, marinas, and wide open horizons. Great if you love being near the water.</p>
+        </div>
+
+        <div class="dir-label">
+          <span>Heading North (Going to get the puppy)</span>
+          <span class="dir-badge badge-human">No puppy yet</span>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-card-top">
+            <h3>Santee National Wildlife Refuge</h3>
+            <p>Gorgeous waterfront observation decks overlooking Lake Marion. Quiet walking paths, stunning scenery, and a great spot to take a breath of fresh air before finishing the drive north.</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Santee+National+Wildlife+Refuge+SC" target="_blank" class="maps-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Open in Maps
+            </a>
+          </div>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-card-top">
+            <h3>Where to Stay</h3>
+            <p><strong>Hampton Inn Santee-I-95</strong> is right off the highway — clean, easy, and reliable. Or search Airbnb for a cozy lakeside cabin with a private sunset deck right on Lake Marion.</p>
+            <div style="display:flex;gap:0.6rem;flex-wrap:wrap">
+              <a href="https://www.google.com/maps/search/?api=1&query=Hampton+Inn+Santee+SC" target="_blank" class="maps-btn">&#128205; Hampton Inn</a>
+              <a href="tel:18037493100" class="maps-btn" style="background:#e6f4ed;color:var(--green)">&#128222; Call Hampton Inn</a>
+              <a href="https://www.airbnb.com/s/Santee--South-Carolina--United-States/homes" target="_blank" class="maps-btn">&#127968; Airbnb Options</a>
+              <a href="https://forecast.weather.gov/MapClick.php?CityName=Santee&state=SC&site=CAE&textField1=33.4885&textField2=-80.4868" target="_blank" class="maps-btn" style="background:#fef3c7;color:var(--amber)">&#9925; Santee Weather</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="dir-label">
+          <span>Heading Home (Puppy is with you now!)</span>
+          <span class="dir-badge badge-pet">🐾 Puppy-friendly</span>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-card-top">
+            <h3>Santee State Park</h3>
+            <p>Flat, heavily-shaded trails tracing the edge of Lake Marion. Leashed dogs are completely welcome. Peaceful, away from highway noise, and a beautiful place to let a new puppy sniff around safely for the first time.</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Santee+State+Park+SC" target="_blank" class="maps-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Open in Maps
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 4: RESTAURANTS -->
+  <div class="card" id="sec-restaurants">
+    <div class="card-head">
+      <div class="card-icon" style="background:#fef3c7;font-size:1.3rem">🍽️</div>
+      <div class="step-num">4</div>
+      <h2>Where to Eat — Dog-Friendly Restaurants</h2>
+    </div>
+    <div class="card-body">
+      <p style="color:var(--muted);font-size:0.93rem;margin-bottom:1.25rem">All of these restaurants have outdoor seating that welcomes leashed dogs. Every spot is verified pet-friendly.</p>
+
+      <div class="tabs">
+        <div class="tab active" id="tab-food-walterboro" onclick="switchFoodTab('walterboro')">🌿 Walterboro Eats</div>
+        <div class="tab" id="tab-food-santee" onclick="switchFoodTab('santee')">🌊 Santee Eats</div>
+      </div>
+
+      <!-- WALTERBORO FOOD -->
+      <div id="content-food-walterboro" class="tab-content active">
+
+        <div class="dir-label">
+          <span>Top Pick</span>
+          <span class="dir-badge badge-food">⭐ Recommended</span>
+        </div>
+
+        <div class="rest-card">
+          <div class="cuisine">American • Steaks & Southern</div>
+          <h3>Fat Jack's Restaurant</h3>
+          <p>The most-reviewed pet-friendly dining spot in Walterboro. Several outdoor covered tables where dogs are welcome. Their specialty is King and Queen Sterling Silver Steaks alongside classic Southern "meat-and-two" lunch specials and fried chicken wings. Relaxed, fun, and local.</p>
+          <div class="paw">🐾 Dog-friendly covered outdoor patio • Leashed dogs welcome</div>
+          <a href="https://www.google.com/maps/search/?api=1&query=Fat+Jacks+Restaurant+Walterboro+SC" target="_blank" class="maps-btn">📍 Find on Maps</a>
+        </div>
+
+        <div class="dir-label">
+          <span>Quick & Easy Option</span>
+          <span class="dir-badge badge-human">Convenient</span>
+        </div>
+
+        <div class="rest-card">
+          <div class="cuisine">American • Fast Food</div>
+          <h3>Sonic Drive-In</h3>
+          <p>Super easy with a puppy — carhop service means you never even have to leave the car! Burgers, hot dogs, chicken sandwiches, fries, and milkshakes. A handful of pet-friendly outdoor tables also available if you'd rather sit outside.</p>
+          <div class="paw">🐾 Carhop service — stay in the car with your pup, or use outdoor tables</div>
+          <a href="https://www.google.com/maps/search/?api=1&query=Sonic+Drive+In+Walterboro+SC" target="_blank" class="maps-btn">📍 Find on Maps</a>
+        </div>
+
+        <div class="info-box info-box-green" style="margin-top:0.75rem">
+          <h4>🐾 Tip for Eating with a New Puppy</h4>
+          <p>When you have the puppy on the way home, pick a quiet outdoor table away from foot traffic. Bring a bowl and water from the car — it helps the pup settle while you eat.</p>
+        </div>
+      </div>
+
+      <!-- SANTEE FOOD -->
+      <div id="content-food-santee" class="tab-content">
+
+        <div class="dir-label">
+          <span>Top Pick — Sit-Down Dinner</span>
+          <span class="dir-badge badge-food">⭐ Recommended</span>
+        </div>
+
+        <div class="rest-card">
+          <div class="cuisine">Steakhouse & Seafood</div>
+          <h3>Santee Steak & Seafood</h3>
+          <p>A proper sit-down dinner experience right in Santee. Partially shaded outdoor patio where dogs are welcome. Great menu: surf and turf, flounder, salmon, rib eye, and even alligator tail bites if you're feeling adventurous. A perfect spot to celebrate the start of the mission.</p>
+          <div class="paw">🐾 Partially shaded outdoor patio • Leashed dogs welcome</div>
+          <a href="https://www.google.com/maps/search/?api=1&query=Santee+Steak+and+Seafood+Santee+SC" target="_blank" class="maps-btn">📍 Find on Maps</a>
+        </div>
+
+        <div class="dir-label">
+          <span>Casual Lunch Option</span>
+          <span class="dir-badge badge-human">Low-key</span>
+        </div>
+
+        <div class="rest-card">
+          <div class="cuisine">American • Deli & Sandwiches</div>
+          <h3>Craig's Place Cafe & Deli</h3>
+          <p>Relaxed, casual, and totally dog-friendly. Outdoor seating where your pup can sit right beside you. Gourmet subs, specialty sandwiches, wraps, and fresh salads. Great for a quick lunch stop without any fuss.</p>
+          <div class="paw">🐾 Outdoor seating • Dogs sit right at the table with you</div>
+          <a href="https://www.google.com/maps/search/?api=1&query=Craigs+Place+Cafe+Deli+Santee+SC" target="_blank" class="maps-btn">📍 Find on Maps</a>
+        </div>
+
+        <div class="dir-label">
+          <span>Dinner with a View</span>
+          <span class="dir-badge badge-food">Special</span>
+        </div>
+
+        <div class="rest-card">
+          <div class="cuisine">American • Southern Comfort</div>
+          <h3>Clark's Restaurant</h3>
+          <p>A Santee landmark. Easy access right off I-95 North before Lake Marion. Leashed dogs can join you at umbrella-shaded tables in a lovely outdoor garden area with a fountain. Beautiful setting, great food — try the mango roast pork or honey-glazed salmon. Call ahead to confirm outdoor availability.</p>
+          <div class="paw">🐾 Garden patio with umbrella shade • Call ahead recommended</div>
+          <div style="display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:0.5rem">
+            <a href="https://www.google.com/maps/search/?api=1&query=Clarks+Restaurant+Santee+SC" target="_blank" class="maps-btn">📍 Find on Maps</a>
+            <a href="tel:8005319658" class="maps-btn" style="background:#e6f4ed;color:var(--green)">📞 Call to Reserve</a>
+          </div>
+        </div>
+
+        <div class="dir-label">
+          <span>Easy Southern Seafood</span>
+          <span class="dir-badge badge-pet">🐾 Puppy Friendly</span>
+        </div>
+
+        <div class="rest-card">
+          <div class="cuisine">Seafood & Wings</div>
+          <h3>Santee Seafood Bistro</h3>
+          <p>A shaded awning with fans, right out front. Oysters, fish, crabs served Southern style, plus wings and BBQ. Very relaxed, very laid-back — a great spot on the way home when you just want to sit, eat, and let the puppy nap under the table.</p>
+          <div class="paw">🐾 Shaded outdoor seating with fans • Great for warm days</div>
+          <a href="https://www.google.com/maps/search/?api=1&query=Santee+Seafood+Bistro+Santee+SC" target="_blank" class="maps-btn">📍 Find on Maps</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: GAS STOPS -->
+  <div class="card" id="sec-gas">
+    <div class="card-head">
+      <div class="card-icon" style="background:#fef3c7;font-size:1.3rem">&#9981;</div>
+      <div class="step-num">5</div>
+      <h2>Best Gas Stops on I-95</h2>
+    </div>
+    <div class="card-body">
+      <p style="color:var(--muted);font-size:0.93rem;margin-bottom:1.25rem">I-95 has some stretches with very few exits. These are the safest, most convenient fuel stops along your route. Try not to let the tank drop below a quarter tank in rural sections.</p>
+
+      <div class="dir-label"><span>Heading North &mdash; Florida to South Carolina</span></div>
+
+      <div class="exp-card">
+        <div class="exp-card-top">
+          <h3>St. Augustine, FL &mdash; Exit 318</h3>
+          <p>About 1.5 hours from Fort Lauderdale. Lots of gas stations and a great early rest stop. Grab coffee and a snack here before the long stretch through Georgia.</p>
+          <a href="https://www.google.com/maps/search/?api=1&query=gas+station+I-95+Exit+318+St+Augustine+FL" target="_blank" class="maps-btn">&#128205; Find Gas Here</a>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-card-top">
+          <h3>Kingsland / St. Marys, GA &mdash; Exit 3</h3>
+          <p>Right at the Florida-Georgia border. Good cluster of gas stations and fast food. A reliable fill-up point before crossing into Georgia, which has longer gaps between exits.</p>
+          <a href="https://www.google.com/maps/search/?api=1&query=gas+station+I-95+Exit+3+Kingsland+GA" target="_blank" class="maps-btn">&#128205; Find Gas Here</a>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-card-top">
+          <h3>Savannah, GA &mdash; Exit 94</h3>
+          <p>Savannah is the major hub about halfway through Georgia. Fuel up here &mdash; it is also a great bathroom break spot. Multiple stations right off the exit.</p>
+          <a href="https://www.google.com/maps/search/?api=1&query=gas+station+I-95+Exit+94+Savannah+GA" target="_blank" class="maps-btn">&#128205; Find Gas Here</a>
+        </div>
+      </div>
+
+      <div class="dir-label"><span>Near Your Overnight Stop &mdash; South Carolina</span></div>
+
+      <div class="exp-card">
+        <div class="exp-card-top">
+          <h3>Walterboro, SC &mdash; Exit 53 (Sniders Hwy)</h3>
+          <p>Multiple gas stations clustered right at this exit near the Hampton Inn. Easy in and out &mdash; fill up here before your overnight stay and again in the morning before heading north.</p>
+          <a href="https://www.google.com/maps/search/?api=1&query=gas+station+I-95+Exit+53+Walterboro+SC" target="_blank" class="maps-btn">&#128205; Find Gas Here</a>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-card-top">
+          <h3>Santee, SC &mdash; Exit 98 (Hwy 6)</h3>
+          <p>If staying in Santee, this exit has several gas stations directly off the ramp. Convenient and well-lit &mdash; easy stop any time of day or night.</p>
+          <a href="https://www.google.com/maps/search/?api=1&query=gas+station+I-95+Exit+98+Santee+SC" target="_blank" class="maps-btn">&#128205; Find Gas Here</a>
+        </div>
+      </div>
+
+      <div class="info-box info-box-amber" style="margin-top:0.25rem">
+        <h4>&#9981; Golden Rule for This Drive</h4>
+        <p>Fill up when you hit a half tank &mdash; never wait for the low-fuel warning. Some Georgia stretches have 20+ miles between exits. Better safe than stuck on the side of I-95.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: PACKING LIST -->
+  <div class="card" id="sec-packing">
+    <div class="card-head">
+      <div class="card-icon" style="background:#fef3c7;font-size:1.3rem">🎒</div>
+      <div class="step-num">6</div>
+      <h2>Packing List</h2>
+    </div>
+    <div class="card-body">
+      <p style="color:var(--muted);font-size:0.93rem;margin-bottom:1.25rem">Print this page or keep it open on your phone. Check things off as you pack!</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+        <div>
+          <div style="font-weight:700;font-size:0.88rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--blue);margin-bottom:0.6rem">For You</div>
+          <ul class="checklist">
+            <li><span class="check-icon check-blue">✓</span>Driver's licenses & IDs</li>
+            <li><span class="check-icon check-blue">✓</span>Phone charger + car charger</li>
+            <li><span class="check-icon check-blue">✓</span>Wallet & credit cards</li>
+            <li><span class="check-icon check-blue">✓</span>Medications & vitamins</li>
+            <li><span class="check-icon check-blue">✓</span>Comfortable pillows</li>
+            <li><span class="check-icon check-blue">✓</span>Snacks & drinks for the car</li>
+            <li><span class="check-icon check-blue">✓</span>Sunglasses</li>
+            <li><span class="check-icon check-blue">✓</span>Change of clothes (2 days)</li>
+            <li><span class="check-icon check-blue">✓</span>Toiletries bag</li>
+            <li><span class="check-icon check-blue">✓</span>Camera or iPad for photos</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size:0.88rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--green);margin-bottom:0.6rem">For the Puppy 🐾</div>
+          <ul class="checklist">
+            <li><span class="check-icon check-green">✓</span>Puppy crate or travel carrier</li>
+            <li><span class="check-icon check-green">✓</span>Old towel or blanket for crate</li>
+            <li><span class="check-icon check-green">✓</span>Puppy food (ask breeder brand)</li>
+            <li><span class="check-icon check-green">✓</span>Small food & water bowls</li>
+            <li><span class="check-icon check-green">✓</span>Bottled water (for pup)</li>
+            <li><span class="check-icon check-green">✓</span>Puppy pads (accidents happen!)</li>
+            <li><span class="check-icon check-green">✓</span>Paper towels & pet-safe cleaner</li>
+            <li><span class="check-icon check-green">✓</span>Collar, ID tag & leash</li>
+            <li><span class="check-icon check-green">✓</span>Small soft toy for comfort</li>
+            <li><span class="check-icon check-green">✓</span>Treats (small & soft)</li>
+            <li><span class="check-icon check-green">✓</span>Poop bags</li>
+            <li><span class="check-icon check-green">✓</span>Puppy's health records & papers</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: PUPPY TIPS -->
+  <div class="card" id="sec-puppy">
+    <div class="card-head">
+      <div class="card-icon" style="background:#e6f4ed;font-size:1.3rem">🐶</div>
+      <div class="step-num">7</div>
+      <h2>Tips for the Drive Home with Puppy</h2>
+    </div>
+    <div class="card-body">
+      <div class="info-box info-box-green" style="margin-bottom:1rem">
+        <h4>🌟 The Most Important Thing</h4>
+        <p>Everything will seem overwhelming for the puppy at first. That's totally normal! A calm, quiet voice and gentle handling goes a long way. You've got this.</p>
+      </div>
+
+      <ul class="checklist">
+        <li>
+          <span class="check-icon check-green">🚗</span>
+          <div><strong>Keep the puppy in the crate in the car.</strong> It's the safest place and helps them feel secure. Put an old t-shirt with a familiar smell in there for comfort.</div>
+        </li>
+        <li>
+          <span class="check-icon check-green">⏱️</span>
+          <div><strong>Stop every 2–3 hours for a potty break.</strong> Take the pup to a grassy area on leash. Young puppies have small bladders — don't wait too long.</div>
+        </li>
+        <li>
+          <span class="check-icon check-amber">🥣</span>
+          <div><strong>Don't feed a big meal right before driving.</strong> A light snack is fine. Puppies can get car sick. Ask the breeder about their last feeding time.</div>
+        </li>
+        <li>
+          <span class="check-icon check-green">💧</span>
+          <div><strong>Offer water at every stop, not in the moving car.</strong> Too much water motion can upset a young tummy. Short drinks at rest stops are perfect.</div>
+        </li>
+        <li>
+          <span class="check-icon check-blue">🎵</span>
+          <div><strong>Keep the car calm and quiet.</strong> Soft music is fine. Avoid loud radio or excitement. A sleepy puppy is a happy road-trip puppy.</div>
+        </li>
+        <li>
+          <span class="check-icon check-amber">🌡️</span>
+          <div><strong>Never leave the puppy alone in a parked car.</strong> Even with windows cracked, cars heat up dangerously fast. If you stop to eat, take turns so someone always stays with the pup.</div>
+        </li>
+        <li>
+          <span class="check-icon check-green">📸</span>
+          <div><strong>Take tons of pictures!</strong> First moments in the car, first time looking out the window, first rest stop. These are memories you'll treasure forever.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 8: BREEDER ARRIVAL CHECKLIST -->
+  <div class="card" id="sec-breeder">
+    <div class="card-head">
+      <div class="card-icon" style="background:#e6f4ed;font-size:1.3rem">&#127968;</div>
+      <div class="step-num">8</div>
+      <h2>At the Breeder &mdash; What to Do &amp; Ask</h2>
+    </div>
+    <div class="card-body">
+      <p style="color:var(--muted);font-size:0.93rem;margin-bottom:1.25rem">This is the big moment! Take a breath, take it slow, and go through this checklist before you leave the breeder. It is easy to forget things when you are excited.</p>
+
+      <div class="info-box info-box-green" style="margin-bottom:1.1rem">
+        <h4>&#128247; First Things First</h4>
+        <p>Take lots of photos and videos the moment you meet the puppy &mdash; with the breeder, in their home environment, first reactions. You will cherish these forever.</p>
+      </div>
+
+      <div style="font-weight:700;font-size:0.88rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--blue);margin-bottom:0.75rem">&#128203; Documents to Collect Before You Leave</div>
+      <ul class="checklist" style="margin-bottom:1.25rem">
+        <li><span class="check-icon check-blue">&#10003;</span><div><strong>Vaccination records</strong> &mdash; written proof of all shots given so far (distemper, parvo, etc.)</div></li>
+        <li><span class="check-icon check-blue">&#10003;</span><div><strong>Health certificate</strong> &mdash; signed by the breeder&rsquo;s vet, confirms the puppy was healthy at departure</div></li>
+        <li><span class="check-icon check-blue">&#10003;</span><div><strong>AKC or registration papers</strong> &mdash; if the puppy is registered, get the paperwork now</div></li>
+        <li><span class="check-icon check-blue">&#10003;</span><div><strong>Breeder&rsquo;s phone number written down</strong> &mdash; not just saved in a phone, written on paper too</div></li>
+        <li><span class="check-icon check-blue">&#10003;</span><div><strong>Microchip number</strong> &mdash; if the puppy has been microchipped, get the chip ID number</div></li>
+      </ul>
+
+      <div style="font-weight:700;font-size:0.88rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--green);margin-bottom:0.75rem">&#128172; Questions to Ask the Breeder</div>
+      <ul class="checklist" style="margin-bottom:1.25rem">
+        <li><span class="check-icon check-green">?</span><div><strong>&ldquo;What food is the puppy eating?&rdquo;</strong> &mdash; get the exact brand and type. Switching food suddenly can upset a puppy&rsquo;s stomach.</div></li>
+        <li><span class="check-icon check-green">?</span><div><strong>&ldquo;How many times a day does the puppy eat, and how much?&rdquo;</strong> &mdash; write this down.</div></li>
+        <li><span class="check-icon check-green">?</span><div><strong>&ldquo;When did the puppy last eat and drink?&rdquo;</strong> &mdash; helpful to know before the drive home.</div></li>
+        <li><span class="check-icon check-green">?</span><div><strong>&ldquo;Is the puppy on any medications or dewormers?&rdquo;</strong> &mdash; get the name, dosage, and schedule.</div></li>
+        <li><span class="check-icon check-green">?</span><div><strong>&ldquo;What vet have you been using?&rdquo;</strong> &mdash; useful context if questions come up later.</div></li>
+        <li><span class="check-icon check-green">?</span><div><strong>&ldquo;Any quirks or things we should know?&rdquo;</strong> &mdash; breeders know their puppies best. Let them share.</div></li>
+      </ul>
+
+      <div style="font-weight:700;font-size:0.88rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--amber);margin-bottom:0.75rem">&#128230; Ask for a Small &ldquo;Comfort Kit&rdquo;</div>
+      <ul class="checklist">
+        <li><span class="check-icon check-amber">&#10003;</span><div>A small unwashed cloth or towel from the puppy&rsquo;s sleeping area &mdash; the familiar smell helps enormously in the car and first nights at home.</div></li>
+        <li><span class="check-icon check-amber">&#10003;</span><div>A small amount of the puppy&rsquo;s current food to mix with new food during the transition at home.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 9: EMERGENCY INFO -->
+  <div class="card" id="sec-emergency">
+    <div class="card-head">
+      <div class="card-icon" style="background:#fef2f2;font-size:1.3rem">🚨</div>
+      <div class="step-num">9</div>
+      <h2>Emergency Contacts & Key Info</h2>
+    </div>
+    <div class="card-body">
+
+      <div class="info-box info-box-red" style="margin-bottom:1rem">
+        <h4>🏥 If the Puppy Seems Unwell on the Road</h4>
+        <ul>
+          <li>Pull over safely. Stay calm — puppies pick up on your anxiety.</li>
+          <li>Check: is it just car sickness? (drooling, whimpering, vomiting) — this is very common and not dangerous.</li>
+          <li>Give fresh air, offer small sips of water, and rest for 20–30 minutes.</li>
+          <li>If symptoms are severe (prolonged vomiting, lethargy, trouble breathing) — call an emergency vet.</li>
+        </ul>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;margin-bottom:1rem">
+        <div class="info-box info-box-blue">
+          <h4>📞 Emergency Vet — Walterboro Area</h4>
+          <p><strong>Lowcountry Veterinary Urgent Care</strong><br>
+          Charleston, SC (40 min from Walterboro)<br>
+          <a href="tel:8435561955" class="phone-link">Call: (843) 556-1955</a></p>
+        </div>
+        <div class="info-box info-box-blue">
+          <h4>📞 Emergency Vet — Santee Area</h4>
+          <p><strong>Palmetto Regional Animal Emergency</strong><br>
+          Orangeburg, SC (30 min from Santee)<br>
+          <a href="tel:8035360639" class="phone-link">Call: (803) 536-0639</a></p>
+        </div>
+      </div>
+
+      <div class="info-box info-box-amber" style="margin-bottom:1rem">
+        <h4>📋 Things to Get from the Breeder</h4>
+        <ul>
+          <li>Puppy's vaccination records & health certificate</li>
+          <li>The brand and type of food the puppy has been eating</li>
+          <li>Breeder's phone number (in case you have questions on the road)</li>
+          <li>Any medications or supplements the puppy is on</li>
+        </ul>
+      </div>
+
+      <div class="info-box info-box-green">
+        <h4>📍 Roadside Assistance</h4>
+        <p><strong>AAA Emergency:</strong> <a href="tel:18002228252" class="phone-link">1-800-222-8252</a><br>
+        <strong>911</strong> — for any roadside emergency, call 911. They will connect you to the right help wherever you are on I-95.</p>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>🐾 Have a beautiful trip! Take lots of photos. 🐾</p>
+  <p style="margin-top:0.3rem;font-size:0.8rem">Made with love for Mom & Dad — Operation Puppy Brother 🎖️</p>
+</footer>
+
+<script>
+function switchTab(target) {
+  ['walterboro','santee'].forEach(function(t){
+    document.getElementById('tab-'+t).classList.remove('active');
+    document.getElementById('content-'+t).classList.remove('active');
+  });
+  document.getElementById('tab-'+target).classList.add('active');
+  document.getElementById('content-'+target).classList.add('active');
+}
+
+function switchFoodTab(target) {
+  ['walterboro','santee'].forEach(function(t){
+    document.getElementById('tab-food-'+t).classList.remove('active');
+    document.getElementById('content-food-'+t).classList.remove('active');
+  });
+  document.getElementById('tab-food-'+target).classList.add('active');
+  document.getElementById('content-food-'+target).classList.add('active');
+}
+
+function launchRoute(stopover) {
+  var start = document.getElementById('start-addr').value.trim();
+  var end = document.getElementById('end-addr').value.trim();
+  if (!start || !end) {
+    alert('Please enter both your home address and the puppy pick-up address first.');
+    return;
+  }
+  var url = 'https://www.google.com/maps/dir/?api=1'
+    + '&origin=' + encodeURIComponent(start)
+    + '&destination=' + encodeURIComponent(end)
+    + '&waypoints=' + encodeURIComponent(stopover)
+    + '&travelmode=driving';
+  window.open(url, '_blank');
+}
+
+function jumpTo(id) {
+  var el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function downloadGuide() {
+  var html = document.documentElement.outerHTML;
+  var blob = new Blob([html], { type: 'text/html' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'Operation_Puppy_Brother_Guide.html';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+</script>
+
+</body>
+</html>

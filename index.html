@@ -153,7 +153,7 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.85rem}
 <!-- HEADER -->
 <header>
   <h1>🗺️ Mom & Dad's Road Trip Guide</h1>
-  <p>Everything you need for the whole trip — from leaving home to arriving back with your new furry family member.</p>
+  <p>Everything you need for the whole trip — Jun 2–6. Coral Springs → St. Cloud → Brunswick → Burnsville → Taylor → Home! 🐾</p>
 </header>
 
 <div class="container">
@@ -170,13 +170,14 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.85rem}
     <div class="nav-links">
       <span class="nav-link" onclick="jumpTo('sec-route')">🧭 Route</span>
       <span class="nav-link" onclick="jumpTo('sec-drivetimes')">⏱️ Drive Times</span>
-      <span class="nav-link" onclick="jumpTo('sec-overnight')">🏨 Overnight Stop</span>
+      <span class="nav-link" onclick="jumpTo('sec-overnight')">🏨 Overnight Stops</span>
       <span class="nav-link" onclick="jumpTo('sec-restaurants')">🍽️ Where to Eat</span>
       <span class="nav-link" onclick="jumpTo('sec-gas')">⛽ Gas Stops</span>
       <span class="nav-link" onclick="jumpTo('sec-packing')">🎒 Packing List</span>
       <span class="nav-link" onclick="jumpTo('sec-puppy')">🐶 Puppy Tips</span>
       <span class="nav-link" onclick="jumpTo('sec-breeder')">🏡 At the Breeder</span>
       <span class="nav-link" onclick="jumpTo('sec-emergency')">🚨 Emergency Info</span>
+      <span class="nav-link" onclick="jumpTo('sec-tracker')">📍 Location & Tracker</span>
     </div>
   </div>
 
@@ -188,26 +189,18 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.85rem}
       <h2>Open Your Driving Directions</h2>
     </div>
     <div class="card-body">
-      <p style="color:var(--muted);font-size:0.93rem;margin-bottom:1.25rem">Just tap one of the buttons below and Google Maps will open on your phone with the whole route ready to go — no typing needed.</p>
-      <div class="input-group">
-        <label>Your Home Address (Starting Point)</label>
-        <input type="text" id="start-addr" value="Fort Lauderdale, FL" placeholder="e.g. Fort Lauderdale, FL">
-      </div>
-      <div class="input-group">
-        <label>Puppy Pick-Up Address (End Point)</label>
-        <input type="text" id="end-addr" value="North Carolina" placeholder="e.g. Brevard, NC">
-      </div>
-      <div class="route-btns">
-        <button class="btn-route btn-route-a" onclick="launchRoute('Walterboro, SC')">
-          🌿 Route via Walterboro, SC
+      <p style="color:var(--muted);font-size:0.93rem;margin-bottom:1.25rem">Tap a button below to open the full route in Google Maps — ready to go, no typing needed.</p>
+      <div class="route-btns" style="grid-template-columns:1fr 1fr;margin-bottom:0">
+        <button class="btn-route btn-route-a" onclick="launchRouteGoing()">
+          🐾 Going: Coral Springs → St. Cloud → Brunswick → Bakersville
         </button>
-        <button class="btn-route btn-route-b" onclick="launchRoute('Santee, SC')">
-          🌊 Route via Santee, SC
+        <button class="btn-route btn-route-b" onclick="launchRouteHome()">
+          🏠 Coming Home: Bakersville → Brunswick → Coral Springs
         </button>
       </div>
       <div class="info-box info-box-blue" style="margin-top:1.1rem">
         <h4>💡 How to use this</h4>
-        <p>Tap a button above. Google Maps will open. Press <strong>Start</strong> and follow the voice directions — it will guide you the whole way including the overnight stop.</p>
+        <p>Tap a button above. Google Maps will open with the full multi-day route. Press <strong>Start</strong> when you're ready to go — it handles all the waypoints for you.</p>
       </div>
     </div>
   </div>
@@ -220,52 +213,92 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.85rem}
       <h2>Drive Times at a Glance</h2>
     </div>
     <div class="card-body">
-      <p style="color:var(--muted);font-size:0.93rem;margin-bottom:1.25rem">Here is how the whole trip breaks down. Times are driving only, not counting stops.</p>
+      <p style="color:var(--muted);font-size:0.93rem;margin-bottom:1.25rem">Here is how the whole trip breaks down day by day. Times are driving only, not counting stops.</p>
+
+      <!-- TRIP CALENDAR -->
+      <div style="background:var(--blue-light);border:1px solid #bee3fb;border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.5rem">
+        <div style="font-weight:700;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--blue);margin-bottom:0.85rem">📅 Full Trip Calendar</div>
+        <div style="display:grid;gap:0.6rem">
+          <div style="display:flex;align-items:center;gap:0.75rem;padding:0.65rem 0.9rem;background:white;border-radius:8px;border:1px solid var(--border)">
+            <span style="font-size:1.2rem">🏠</span>
+            <div><div style="font-weight:700;font-size:0.95rem">Tue, Jun 2</div><div style="font-size:0.85rem;color:var(--muted)">Leave Coral Springs, FL → drive ~1 hr → arrive at John's house, St. Cloud, FL</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.75rem;padding:0.65rem 0.9rem;background:white;border-radius:8px;border:1px solid var(--border)">
+            <span style="font-size:1.2rem">🛣️</span>
+            <div><div style="font-weight:700;font-size:0.95rem">Wed, Jun 3</div><div style="font-size:0.85rem;color:var(--muted)">Leave St. Cloud → drive ~4 hrs → overnight Brunswick, GA <span style="background:var(--green);color:white;font-size:0.72rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:10px;margin-left:4px">SLEEP</span></div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.75rem;padding:0.65rem 0.9rem;background:white;border-radius:8px;border:1px solid var(--border)">
+            <span style="font-size:1.2rem">🏔️</span>
+            <div><div style="font-weight:700;font-size:0.95rem">Thu, Jun 4</div><div style="font-size:0.85rem;color:var(--muted)">Brunswick → drive ~4 hrs → overnight Burnsville, NC (Carolina Country Inn) <span style="background:var(--blue);color:white;font-size:0.72rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:10px;margin-left:4px">SLEEP</span></div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.75rem;padding:0.65rem 0.9rem;background:var(--green-light);border-radius:8px;border:1px solid #b7deca">
+            <span style="font-size:1.2rem">🐶</span>
+            <div><div style="font-weight:700;font-size:0.95rem">Fri, Jun 5 — 10:30 AM</div><div style="font-size:0.85rem;color:var(--muted)">Bakersville, NC — Pick up Taylor! (20 min from Burnsville) → drive to Brunswick, GA <span style="background:var(--green);color:white;font-size:0.72rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:10px;margin-left:4px">SLEEP</span></div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.75rem;padding:0.65rem 0.9rem;background:#fef3c7;border-radius:8px;border:1px solid #fcd34d">
+            <span style="font-size:1.2rem">🎉</span>
+            <div><div style="font-weight:700;font-size:0.95rem">Sat, Jun 6</div><div style="font-size:0.85rem;color:var(--muted)">Brunswick → drive straight home to Coral Springs, FL (no St. Cloud stop) — Mission Complete! <span style="background:var(--amber);color:white;font-size:0.72rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:10px;margin-left:4px">HOME</span></div></div>
+          </div>
+        </div>
+      </div>
+
       <div style="margin-bottom:1.5rem">
-        <div style="font-weight:700;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--blue);margin-bottom:0.75rem">Heading North to Pick Up the Puppy</div>
+        <div style="font-weight:700;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--blue);margin-bottom:0.75rem">Heading North to Pick Up Taylor</div>
         <div style="display:grid;gap:0.5rem">
           <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:#f8fafc;border:1px solid var(--border);border-radius:8px">
-            <span style="font-size:1.3rem">&#127968;</span>
-            <div style="flex:1"><div style="font-weight:600;font-size:0.95rem">Fort Lauderdale, FL</div><div style="font-size:0.82rem;color:var(--muted)">Home &mdash; Starting Point</div></div>
+            <span style="font-size:1.3rem">🏠</span>
+            <div style="flex:1"><div style="font-weight:600;font-size:0.95rem">Coral Springs, FL 33067</div><div style="font-size:0.82rem;color:var(--muted)">Parents' Home — True Starting Point (Tue Jun 2)</div></div>
           </div>
-          <div style="text-align:center;color:var(--muted);font-size:0.85rem;padding:0.1rem 0">about <strong style="color:var(--text)">5 hrs 45 min</strong> &nbsp;&middot;&nbsp; ~380 miles</div>
+          <div style="text-align:center;color:var(--muted);font-size:0.85rem;padding:0.1rem 0">about <strong style="color:var(--text)">~1 hr</strong> &nbsp;&middot;&nbsp; ~60 miles</div>
+          <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:#fef3c7;border:1px solid #fcd34d;border-radius:8px">
+            <span style="font-size:1.3rem">&#127968;</span>
+            <div style="flex:1"><div style="font-weight:600;font-size:0.95rem">St. Cloud, FL 34771 — John's House</div><div style="font-size:0.82rem;color:var(--muted)">Stay overnight Tue Jun 2 · Leave Wed Jun 3 morning</div></div>
+            <span style="background:var(--amber);color:white;font-size:0.72rem;font-weight:700;padding:0.2rem 0.55rem;border-radius:12px">VISIT</span>
+          </div>
+          <div style="text-align:center;color:var(--muted);font-size:0.85rem;padding:0.1rem 0">about <strong style="color:var(--text)">~4 hrs</strong> &nbsp;&middot;&nbsp; ~250 miles</div>
           <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:var(--green-light);border:1px solid #b7deca;border-radius:8px">
-            <span style="font-size:1.3rem">&#127807;</span>
-            <div style="flex:1"><div style="font-weight:600;font-size:0.95rem">Walterboro or Santee, SC</div><div style="font-size:0.82rem;color:var(--muted)">Overnight Stop &mdash; Rest Here</div></div>
+            <span style="font-size:1.3rem">🌿</span>
+            <div style="flex:1"><div style="font-weight:600;font-size:0.95rem">Brunswick, GA</div><div style="font-size:0.82rem;color:var(--muted)">Holiday Inn Express — Overnight Stop (same hotel both ways!)</div></div>
             <span style="background:var(--green);color:white;font-size:0.72rem;font-weight:700;padding:0.2rem 0.55rem;border-radius:12px">SLEEP</span>
           </div>
-          <div style="text-align:center;color:var(--muted);font-size:0.85rem;padding:0.1rem 0">about <strong style="color:var(--text)">3 hrs 30 min &ndash; 4 hrs</strong> &nbsp;&middot;&nbsp; ~220 miles</div>
+          <div style="text-align:center;color:var(--muted);font-size:0.85rem;padding:0.1rem 0">about <strong style="color:var(--text)">~4 hrs</strong> &nbsp;&middot;&nbsp; ~250 miles</div>
           <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:var(--blue-light);border:1px solid #bee3fb;border-radius:8px">
+            <span style="font-size:1.3rem">🏔️</span>
+            <div style="flex:1"><div style="font-weight:600;font-size:0.95rem">Burnsville, NC</div><div style="font-size:0.82rem;color:var(--muted)">Carolina Country Inn — 30 min from the breeder (Thu Jun 4)</div></div>
+            <span style="background:var(--blue);color:white;font-size:0.72rem;font-weight:700;padding:0.2rem 0.55rem;border-radius:12px">SLEEP</span>
+          </div>
+          <div style="text-align:center;color:var(--muted);font-size:0.85rem;padding:0.1rem 0">about <strong style="color:var(--text)">20 min</strong></div>
+          <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:#e6f4ed;border:1px solid #b7deca;border-radius:8px">
             <span style="font-size:1.3rem">&#128062;</span>
-            <div style="flex:1"><div style="font-weight:600;font-size:0.95rem">North Carolina &mdash; Breeder</div><div style="font-size:0.82rem;color:var(--muted)">Destination &mdash; Pick Up the Puppy!</div></div>
-            <span style="background:var(--blue);color:white;font-size:0.72rem;font-weight:700;padding:0.2rem 0.55rem;border-radius:12px">GOAL</span>
+            <div style="flex:1"><div style="font-weight:600;font-size:0.95rem">Bakersville, NC — Breeder</div><div style="font-size:0.82rem;color:var(--muted)">Pick up Taylor! Arrive by 10:30 AM (Fri Jun 5)</div></div>
+            <span style="background:#2a7d4f;color:white;font-size:0.72rem;font-weight:700;padding:0.2rem 0.55rem;border-radius:12px">🐾 GOAL</span>
           </div>
         </div>
       </div>
       <div>
-        <div style="font-weight:700;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--green);margin-bottom:0.75rem">Heading Home with the Puppy</div>
+        <div style="font-weight:700;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--green);margin-bottom:0.75rem">Heading Home with Taylor</div>
         <div style="display:grid;gap:0.5rem">
           <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:#f8fafc;border:1px solid var(--border);border-radius:8px">
             <span style="font-size:1.3rem">&#128062;</span>
-            <div style="flex:1"><div style="font-weight:600;font-size:0.95rem">North Carolina &mdash; Breeder</div><div style="font-size:0.82rem;color:var(--muted)">Starting Point (with puppy!)</div></div>
+            <div style="flex:1"><div style="font-weight:600;font-size:0.95rem">Bakersville, NC — Breeder</div><div style="font-size:0.82rem;color:var(--muted)">Starting Point (with Taylor!) — Fri Jun 5</div></div>
           </div>
-          <div style="text-align:center;color:var(--muted);font-size:0.85rem;padding:0.1rem 0">about <strong style="color:var(--text)">3 hrs 30 min &ndash; 4 hrs</strong> &nbsp;&middot;&nbsp; ~220 miles</div>
+          <div style="text-align:center;color:var(--muted);font-size:0.85rem;padding:0.1rem 0">about <strong style="color:var(--text)">~4 hrs</strong> &nbsp;&middot;&nbsp; ~250 miles</div>
           <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:var(--green-light);border:1px solid #b7deca;border-radius:8px">
-            <span style="font-size:1.3rem">&#127807;</span>
-            <div style="flex:1"><div style="font-weight:600;font-size:0.95rem">Walterboro or Santee, SC</div><div style="font-size:0.82rem;color:var(--muted)">Overnight Stop &mdash; Rest Here with Puppy</div></div>
+            <span style="font-size:1.3rem">🌿</span>
+            <div style="flex:1"><div style="font-weight:600;font-size:0.95rem">Brunswick, GA</div><div style="font-size:0.82rem;color:var(--muted)">Same Holiday Inn Express — Overnight with Taylor! (Fri Jun 5)</div></div>
             <span style="background:var(--green);color:white;font-size:0.72rem;font-weight:700;padding:0.2rem 0.55rem;border-radius:12px">SLEEP</span>
           </div>
-          <div style="text-align:center;color:var(--muted);font-size:0.85rem;padding:0.1rem 0">about <strong style="color:var(--text)">5 hrs 45 min</strong> &nbsp;&middot;&nbsp; ~380 miles</div>
+          <div style="text-align:center;color:var(--muted);font-size:0.85rem;padding:0.1rem 0">about <strong style="color:var(--text)">~5.5 hrs</strong> &nbsp;&middot;&nbsp; ~340 miles</div>
           <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:#fef3c7;border:1px solid #fcd34d;border-radius:8px">
             <span style="font-size:1.3rem">&#127968;</span>
-            <div style="flex:1"><div style="font-weight:600;font-size:0.95rem">Fort Lauderdale, FL</div><div style="font-size:0.82rem;color:var(--muted)">Home &mdash; Mission Complete!</div></div>
+            <div style="flex:1"><div style="font-weight:600;font-size:0.95rem">Coral Springs, FL 33067 — Home!</div><div style="font-size:0.82rem;color:var(--muted)">Mission Complete — straight home, no St. Cloud stop (Sat Jun 6)</div></div>
             <span style="background:var(--amber);color:white;font-size:0.72rem;font-weight:700;padding:0.2rem 0.55rem;border-radius:12px">HOME</span>
           </div>
         </div>
       </div>
       <div class="info-box info-box-amber" style="margin-top:1.1rem">
         <h4>Total Trip Time</h4>
-        <p>Each direction is roughly <strong>9.5 to 10 hours of driving</strong>, split comfortably over 2 days with an overnight stop. Add 30 min per rest or meal stop &mdash; plan for 2 to 3 stops each day.</p>
+        <p>Each direction is roughly <strong>~9.5 hours of driving</strong>, split over 2 easy ~4-hour days. Add 30 min per rest or meal stop — plan for 2 to 3 stops each day. The trip from Burnsville to Bakersville on Friday morning is just 20 minutes!</p>
       </div>
     </div>
   </div>
@@ -278,59 +311,65 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.85rem}
       <h2>Choose Your Overnight Stop</h2>
     </div>
     <div class="card-body">
-      <p style="color:var(--muted);font-size:0.93rem;margin-bottom:1.25rem">Both are located right at the 6-hour mark on I-95. Pick the vibe you prefer!</p>
+      <p style="color:var(--muted);font-size:0.93rem;margin-bottom:1.25rem">You have two overnight stops on the way up — and the same Brunswick hotel on the way back. Both already reserved!</p>
 
       <div class="tabs">
-        <div class="tab active" id="tab-walterboro" onclick="switchTab('walterboro')">Option A: Walterboro, SC</div>
-        <div class="tab" id="tab-santee" onclick="switchTab('santee')">Option B: Santee, SC</div>
+        <div class="tab active" id="tab-walterboro" onclick="switchTab('walterboro')">Stop 1: Brunswick, GA</div>
+        <div class="tab" id="tab-santee" onclick="switchTab('santee')">Stop 2: Burnsville, NC</div>
       </div>
 
-      <!-- WALTERBORO -->
+      <!-- BRUNSWICK GA -->
       <div id="content-walterboro" class="tab-content active">
-        <div class="info-box info-box-blue" style="margin-bottom:1.1rem">
-          <h4>🌿 About Walterboro</h4>
-          <p>A gorgeous, quiet Lowcountry town with Spanish-moss-draped avenues, historic Southern architecture, and a peaceful small-town feel. Perfect for a relaxed overnight.</p>
+        <div class="info-box info-box-green" style="margin-bottom:1.1rem">
+          <h4>✅ Already Reserved — Holiday Inn Express, Brunswick, GA</h4>
+          <p>You're staying at the <strong>Holiday Inn Express in Brunswick, GA</strong> — same hotel both going <em>and</em> coming home. About 4 hours from John's house in St. Cloud. Great location right off I-95.</p>
         </div>
 
         <div class="dir-label">
-          <span>Heading North (Going to get the puppy)</span>
+          <span>Wed Jun 3 — Heading North (Going to get Taylor)</span>
           <span class="dir-badge badge-human">No puppy yet</span>
         </div>
 
         <div class="exp-card">
           <div class="exp-card-top">
-            <h3>SC Artisans Center</h3>
-            <p>The state's official folk art gallery — cool, air-conditioned, and beautiful. Handmade local pottery, glasswork, and Southern textiles. A wonderful way to stretch your legs in a peaceful, elegant setting.</p>
-            <a href="https://www.google.com/maps/search/?api=1&query=South+Carolina+Artisans+Center+Walterboro+SC" target="_blank" class="maps-btn">
+            <h3>Holiday Inn Express — Brunswick, GA</h3>
+            <p>Your reserved hotel for the night. Brunswick is a beautiful coastal Georgia town just across from St. Simons Island, with great seafood and a charming historic district nearby if you feel like stretching your legs.</p>
+            <div style="display:flex;gap:0.6rem;flex-wrap:wrap">
+              <a href="https://www.google.com/maps/search/?api=1&query=Holiday+Inn+Express+Brunswick+GA" target="_blank" class="maps-btn">&#128205; Find on Maps</a>
+              <a href="https://forecast.weather.gov/MapClick.php?CityName=Brunswick&state=GA&site=JAX&textField1=31.1499&textField2=-81.4915" target="_blank" class="maps-btn" style="background:#fef3c7;color:var(--amber)">&#9925; Brunswick Weather</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-card-top">
+            <h3>Historic Downtown Brunswick</h3>
+            <p>Just a short drive from I-95. Beautiful old downtown with tree-lined streets and Southern architecture. A nice evening walk after a long day in the car. Check out the Lover's Oak — a 900-year-old live oak right in town.</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Historic+Downtown+Brunswick+GA" target="_blank" class="maps-btn">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
               Open in Maps
             </a>
           </div>
         </div>
 
-        <div class="exp-card">
-          <div class="exp-card-top">
-            <h3>Where to Stay</h3>
-            <p>The <strong>Hampton Inn & Suites Walterboro</strong> at Exit 53 is clean, quiet, and reliable — no surprises. If you'd prefer something with more charm, search Airbnb for historic cottages like <em>Eden at Gracefield</em>.</p>
-            <div style="display:flex;gap:0.6rem;flex-wrap:wrap">
-              <a href="https://www.google.com/maps/search/?api=1&query=Hampton+Inn+Walterboro+SC" target="_blank" class="maps-btn">&#128205; Hampton Inn</a>
-              <a href="tel:18436454000" class="maps-btn" style="background:#e6f4ed;color:var(--green)">&#128222; Call Hampton Inn</a>
-              <a href="https://www.airbnb.com/s/Walterboro--South-Carolina--United-States/homes" target="_blank" class="maps-btn">&#127968; Airbnb Options</a>
-              <a href="https://forecast.weather.gov/MapClick.php?CityName=Walterboro&state=SC&site=CHS&textField1=32.9049&textField2=-80.6698" target="_blank" class="maps-btn" style="background:#fef3c7;color:var(--amber)">&#9925; Walterboro Weather</a>
-            </div>
-          </div>
-        </div>
-
         <div class="dir-label">
-          <span>Heading Home (Puppy is with you now!)</span>
+          <span>Fri Jun 5 — Heading Home (Taylor is with you now!)</span>
           <span class="dir-badge badge-pet">🐾 Puppy-friendly</span>
         </div>
 
         <div class="exp-card">
           <div class="exp-card-top">
-            <h3>Walterboro Wildlife Sanctuary</h3>
-            <p>Miles of smooth, elevated boardwalk trails winding over a stunning cypress swamp. Completely shaded, very low-key, and leash-friendly. A magical first outdoor experience for a new puppy.</p>
-            <a href="https://www.google.com/maps/search/?api=1&query=Walterboro+Wildlife+Sanctuary+SC" target="_blank" class="maps-btn">
+            <h3>Same Holiday Inn Express — Brunswick, GA</h3>
+            <p>You're back at the same hotel for the return trip — so you already know it, and Taylor has a familiar smell. One final night before the big push home to Coral Springs on Saturday!</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Holiday+Inn+Express+Brunswick+GA" target="_blank" class="maps-btn">&#128205; Find on Maps</a>
+          </div>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-card-top">
+            <h3>Blythe Island Regional Park</h3>
+            <p>A beautiful waterfront park just outside Brunswick with grassy areas, walking paths, and views of the marsh. Wonderful spot for a new puppy's first real sniff-around after the drive down from the mountains.</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Blythe+Island+Regional+Park+Brunswick+GA" target="_blank" class="maps-btn">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
               Open in Maps
             </a>
@@ -338,55 +377,55 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.85rem}
         </div>
       </div>
 
-      <!-- SANTEE -->
+      <!-- BURNSVILLE NC -->
       <div id="content-santee" class="tab-content">
         <div class="info-box info-box-blue" style="margin-bottom:1.1rem">
-          <h4>🌊 About Santee</h4>
-          <p>Situated right on the banks of Lake Marion — one of South Carolina's largest lakes. Beautiful waterfront views, marinas, and wide open horizons. Great if you love being near the water.</p>
+          <h4>✅ Already Reserved — Carolina Country Inn, Burnsville, NC</h4>
+          <p>You've already reserved a room at the <strong>Carolina Country Inn in Burnsville, NC</strong>. It's just 30 minutes from the breeder in Bakersville — so Friday morning is relaxed. Just wake up, have breakfast, and head over for your 10:30 AM pickup!</p>
+        </div>
+
+        <div class="info-box info-box-amber" style="margin-bottom:1.1rem">
+          <h4>⏰ Friday Morning Reminder — 10:30 AM Pickup!</h4>
+          <p>The breeder appointment is at <strong>10:30 AM on Friday, June 5th</strong> in Bakersville, NC — only 20 minutes from the hotel. Don't rush! Just leave by 10:00 AM and you'll be perfectly on time.</p>
         </div>
 
         <div class="dir-label">
-          <span>Heading North (Going to get the puppy)</span>
-          <span class="dir-badge badge-human">No puppy yet</span>
+          <span>Thu Jun 4 — Arriving from Brunswick</span>
+          <span class="dir-badge badge-human">Almost there!</span>
         </div>
 
         <div class="exp-card">
           <div class="exp-card-top">
-            <h3>Santee National Wildlife Refuge</h3>
-            <p>Gorgeous waterfront observation decks overlooking Lake Marion. Quiet walking paths, stunning scenery, and a great spot to take a breath of fresh air before finishing the drive north.</p>
-            <a href="https://www.google.com/maps/search/?api=1&query=Santee+National+Wildlife+Refuge+SC" target="_blank" class="maps-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-              Open in Maps
-            </a>
-          </div>
-        </div>
-
-        <div class="exp-card">
-          <div class="exp-card-top">
-            <h3>Where to Stay</h3>
-            <p><strong>Hampton Inn Santee-I-95</strong> is right off the highway — clean, easy, and reliable. Or search Airbnb for a cozy lakeside cabin with a private sunset deck right on Lake Marion.</p>
+            <h3>Carolina Country Inn — Burnsville, NC</h3>
+            <p>Your reserved hotel in the beautiful Blue Ridge Mountains. Burnsville is a charming small mountain town — great local food, fresh air, and stunning scenery. A perfect place to rest before the big morning.</p>
             <div style="display:flex;gap:0.6rem;flex-wrap:wrap">
-              <a href="https://www.google.com/maps/search/?api=1&query=Hampton+Inn+Santee+SC" target="_blank" class="maps-btn">&#128205; Hampton Inn</a>
-              <a href="tel:18037493100" class="maps-btn" style="background:#e6f4ed;color:var(--green)">&#128222; Call Hampton Inn</a>
-              <a href="https://www.airbnb.com/s/Santee--South-Carolina--United-States/homes" target="_blank" class="maps-btn">&#127968; Airbnb Options</a>
-              <a href="https://forecast.weather.gov/MapClick.php?CityName=Santee&state=SC&site=CAE&textField1=33.4885&textField2=-80.4868" target="_blank" class="maps-btn" style="background:#fef3c7;color:var(--amber)">&#9925; Santee Weather</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=Carolina+Country+Inn+Burnsville+NC" target="_blank" class="maps-btn">&#128205; Find on Maps</a>
+              <a href="https://forecast.weather.gov/MapClick.php?CityName=Burnsville&state=NC&site=MHX&textField1=35.9182&textField2=-82.2946" target="_blank" class="maps-btn" style="background:#fef3c7;color:var(--amber)">&#9925; Burnsville Weather</a>
             </div>
           </div>
         </div>
 
+        <div class="exp-card">
+          <div class="exp-card-top">
+            <h3>Mt. Mitchell State Park (nearby)</h3>
+            <p>The highest peak east of the Mississippi River is just a short drive away. Beautiful mountain views and cool mountain air — a wonderful way to spend the evening before Taylor pickup day.</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Mount+Mitchell+State+Park+NC" target="_blank" class="maps-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Open in Maps
+            </a>
+          </div>
+        </div>
+
         <div class="dir-label">
-          <span>Heading Home (Puppy is with you now!)</span>
-          <span class="dir-badge badge-pet">🐾 Puppy-friendly</span>
+          <span>Fri Jun 5 Morning — Breeder is 20 minutes away!</span>
+          <span class="dir-badge badge-pet">🐾 Today's the day!</span>
         </div>
 
         <div class="exp-card">
           <div class="exp-card-top">
-            <h3>Santee State Park</h3>
-            <p>Flat, heavily-shaded trails tracing the edge of Lake Marion. Leashed dogs are completely welcome. Peaceful, away from highway noise, and a beautiful place to let a new puppy sniff around safely for the first time.</p>
-            <a href="https://www.google.com/maps/search/?api=1&query=Santee+State+Park+SC" target="_blank" class="maps-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-              Open in Maps
-            </a>
+            <h3>Bakersville, NC — Puppy Pickup!</h3>
+            <p>Just 20 minutes from the hotel. Leave by 10:00 AM to arrive comfortably by 10:30 AM. This is it — the moment you've been driving toward! Take a breath, take photos, and enjoy every second.</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Bakersville+NC+28705" target="_blank" class="maps-btn">&#128205; Bakersville on Maps</a>
           </div>
         </div>
       </div>
@@ -405,101 +444,83 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.85rem}
       <p style="color:var(--muted);font-size:0.93rem;margin-bottom:1.25rem">All of these restaurants have outdoor seating that welcomes leashed dogs. Every spot is verified pet-friendly.</p>
 
       <div class="tabs">
-        <div class="tab active" id="tab-food-walterboro" onclick="switchFoodTab('walterboro')">🌿 Walterboro Eats</div>
-        <div class="tab" id="tab-food-santee" onclick="switchFoodTab('santee')">🌊 Santee Eats</div>
+        <div class="tab active" id="tab-food-walterboro" onclick="switchFoodTab('walterboro')">🌿 Brunswick, GA Eats</div>
+        <div class="tab" id="tab-food-santee" onclick="switchFoodTab('santee')">🏔️ Burnsville, NC Eats</div>
       </div>
 
-      <!-- WALTERBORO FOOD -->
+      <!-- BRUNSWICK FOOD -->
       <div id="content-food-walterboro" class="tab-content active">
 
         <div class="dir-label">
-          <span>Top Pick</span>
+          <span>Top Pick — Seafood Dinner</span>
           <span class="dir-badge badge-food">⭐ Recommended</span>
         </div>
 
         <div class="rest-card">
-          <div class="cuisine">American • Steaks & Southern</div>
-          <h3>Fat Jack's Restaurant</h3>
-          <p>The most-reviewed pet-friendly dining spot in Walterboro. Several outdoor covered tables where dogs are welcome. Their specialty is King and Queen Sterling Silver Steaks alongside classic Southern "meat-and-two" lunch specials and fried chicken wings. Relaxed, fun, and local.</p>
-          <div class="paw">🐾 Dog-friendly covered outdoor patio • Leashed dogs welcome</div>
-          <a href="https://www.google.com/maps/search/?api=1&query=Fat+Jacks+Restaurant+Walterboro+SC" target="_blank" class="maps-btn">📍 Find on Maps</a>
+          <div class="cuisine">Seafood & Southern</div>
+          <h3>Cargo Portside Grill</h3>
+          <p>A Brunswick favorite right on the waterfront. Great fresh seafood, coastal Georgia charm, and outdoor seating where you can enjoy the marsh views. Perfect for a celebratory dinner before (or after) the big pickup!</p>
+          <div class="paw">🐾 Outdoor waterfront seating • Leashed dogs welcome</div>
+          <a href="https://www.google.com/maps/search/?api=1&query=Cargo+Portside+Grill+Brunswick+GA" target="_blank" class="maps-btn">📍 Find on Maps</a>
         </div>
 
         <div class="dir-label">
-          <span>Quick & Easy Option</span>
+          <span>Casual & Quick</span>
           <span class="dir-badge badge-human">Convenient</span>
         </div>
 
         <div class="rest-card">
-          <div class="cuisine">American • Fast Food</div>
-          <h3>Sonic Drive-In</h3>
-          <p>Super easy with a puppy — carhop service means you never even have to leave the car! Burgers, hot dogs, chicken sandwiches, fries, and milkshakes. A handful of pet-friendly outdoor tables also available if you'd rather sit outside.</p>
-          <div class="paw">🐾 Carhop service — stay in the car with your pup, or use outdoor tables</div>
-          <a href="https://www.google.com/maps/search/?api=1&query=Sonic+Drive+In+Walterboro+SC" target="_blank" class="maps-btn">📍 Find on Maps</a>
+          <div class="cuisine">American • Burgers & Comfort Food</div>
+          <h3>Southern Soul Barbeque</h3>
+          <p>Famous Brunswick BBQ joint on St. Simons Island — just a short drive over the bridge. Smoky, slow-cooked, and totally Southern. Covered outdoor picnic seating where dogs are welcome beside you.</p>
+          <div class="paw">🐾 Outdoor picnic tables • Dogs welcome</div>
+          <a href="https://www.google.com/maps/search/?api=1&query=Southern+Soul+Barbeque+Brunswick+GA" target="_blank" class="maps-btn">📍 Find on Maps</a>
         </div>
 
         <div class="info-box info-box-green" style="margin-top:0.75rem">
-          <h4>🐾 Tip for Eating with a New Puppy</h4>
-          <p>When you have the puppy on the way home, pick a quiet outdoor table away from foot traffic. Bring a bowl and water from the car — it helps the pup settle while you eat.</p>
+          <h4>🐾 Tip for Eating with Taylor on the Way Home</h4>
+          <p>Pick a quiet outdoor table away from foot traffic. Bring Taylor's water bowl from the car — it helps the pup settle while you eat. Taylor will probably just want to sleep after the big travel day!</p>
         </div>
       </div>
+        </div>
 
-      <!-- SANTEE FOOD -->
+        <div class="rest-card">
+          <div class="cuisine">American • Fast Food</div>
+          <h3>Sonic Drive-In — Brunswick</h3>
+          <p>Super easy with a puppy — carhop service means you never even have to leave the car! A handful of pet-friendly outdoor tables also available. Great on the return trip when you want to keep moving.</p>
+          <div class="paw">🐾 Carhop service — stay in the car with Taylor, or use outdoor tables</div>
+          <a href="https://www.google.com/maps/search/?api=1&query=Sonic+Drive+In+Brunswick+GA" target="_blank" class="maps-btn">📍 Find on Maps</a>
+        </div>
+
+      </div>
+
+      <!-- BURNSVILLE NC FOOD -->
       <div id="content-food-santee" class="tab-content">
 
         <div class="dir-label">
-          <span>Top Pick — Sit-Down Dinner</span>
+          <span>Thu Jun 4 — Dinner in Burnsville</span>
           <span class="dir-badge badge-food">⭐ Recommended</span>
         </div>
 
         <div class="rest-card">
-          <div class="cuisine">Steakhouse & Seafood</div>
-          <h3>Santee Steak & Seafood</h3>
-          <p>A proper sit-down dinner experience right in Santee. Partially shaded outdoor patio where dogs are welcome. Great menu: surf and turf, flounder, salmon, rib eye, and even alligator tail bites if you're feeling adventurous. A perfect spot to celebrate the start of the mission.</p>
-          <div class="paw">🐾 Partially shaded outdoor patio • Leashed dogs welcome</div>
-          <a href="https://www.google.com/maps/search/?api=1&query=Santee+Steak+and+Seafood+Santee+SC" target="_blank" class="maps-btn">📍 Find on Maps</a>
+          <div class="cuisine">American • Mountain Farm to Table</div>
+          <h3>The Garden Deli — Burnsville, NC</h3>
+          <p>A charming local spot in downtown Burnsville. Fresh ingredients, good sandwiches and comfort food, relaxed atmosphere. A great dinner before the big morning. Dog-friendly outdoor seating available.</p>
+          <div class="paw">🐾 Outdoor seating • Leashed dogs welcome</div>
+          <a href="https://www.google.com/maps/search/?api=1&query=restaurant+downtown+Burnsville+NC" target="_blank" class="maps-btn">📍 Burnsville Restaurants</a>
         </div>
 
         <div class="dir-label">
-          <span>Casual Lunch Option</span>
-          <span class="dir-badge badge-human">Low-key</span>
+          <span>Fri Jun 5 Morning — Breakfast before Taylor Pickup</span>
+          <span class="dir-badge badge-human">Easy start</span>
         </div>
 
         <div class="rest-card">
-          <div class="cuisine">American • Deli & Sandwiches</div>
-          <h3>Craig's Place Cafe & Deli</h3>
-          <p>Relaxed, casual, and totally dog-friendly. Outdoor seating where your pup can sit right beside you. Gourmet subs, specialty sandwiches, wraps, and fresh salads. Great for a quick lunch stop without any fuss.</p>
-          <div class="paw">🐾 Outdoor seating • Dogs sit right at the table with you</div>
-          <a href="https://www.google.com/maps/search/?api=1&query=Craigs+Place+Cafe+Deli+Santee+SC" target="_blank" class="maps-btn">📍 Find on Maps</a>
-        </div>
-
-        <div class="dir-label">
-          <span>Dinner with a View</span>
-          <span class="dir-badge badge-food">Special</span>
-        </div>
-
-        <div class="rest-card">
-          <div class="cuisine">American • Southern Comfort</div>
-          <h3>Clark's Restaurant</h3>
-          <p>A Santee landmark. Easy access right off I-95 North before Lake Marion. Leashed dogs can join you at umbrella-shaded tables in a lovely outdoor garden area with a fountain. Beautiful setting, great food — try the mango roast pork or honey-glazed salmon. Call ahead to confirm outdoor availability.</p>
-          <div class="paw">🐾 Garden patio with umbrella shade • Call ahead recommended</div>
-          <div style="display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:0.5rem">
-            <a href="https://www.google.com/maps/search/?api=1&query=Clarks+Restaurant+Santee+SC" target="_blank" class="maps-btn">📍 Find on Maps</a>
-            <a href="tel:8005319658" class="maps-btn" style="background:#e6f4ed;color:var(--green)">📞 Call to Reserve</a>
-          </div>
-        </div>
-
-        <div class="dir-label">
-          <span>Easy Southern Seafood</span>
-          <span class="dir-badge badge-pet">🐾 Puppy Friendly</span>
-        </div>
-
-        <div class="rest-card">
-          <div class="cuisine">Seafood & Wings</div>
-          <h3>Santee Seafood Bistro</h3>
-          <p>A shaded awning with fans, right out front. Oysters, fish, crabs served Southern style, plus wings and BBQ. Very relaxed, very laid-back — a great spot on the way home when you just want to sit, eat, and let the puppy nap under the table.</p>
-          <div class="paw">🐾 Shaded outdoor seating with fans • Great for warm days</div>
-          <a href="https://www.google.com/maps/search/?api=1&query=Santee+Seafood+Bistro+Santee+SC" target="_blank" class="maps-btn">📍 Find on Maps</a>
+          <div class="cuisine">Breakfast & Coffee</div>
+          <h3>Local Breakfast in Burnsville</h3>
+          <p>Leave yourself time for a relaxed breakfast before heading to the breeder. You don't need to rush — the pickup isn't until 10:30 AM and Bakersville is only 20 minutes away. Enjoy the mountain morning!</p>
+          <div class="paw">🏔️ Beautiful Blue Ridge Mountain views to start the day</div>
+          <a href="https://www.google.com/maps/search/?api=1&query=breakfast+Burnsville+NC" target="_blank" class="maps-btn">📍 Find Breakfast Spots</a>
         </div>
 
       </div>
@@ -514,49 +535,51 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.85rem}
       <h2>Best Gas Stops on I-95</h2>
     </div>
     <div class="card-body">
-      <p style="color:var(--muted);font-size:0.93rem;margin-bottom:1.25rem">I-95 has some stretches with very few exits. These are the safest, most convenient fuel stops along your route. Try not to let the tank drop below a quarter tank in rural sections.</p>
+      <p style="color:var(--muted);font-size:0.93rem;margin-bottom:1.25rem">I-95 and I-26 have some stretches with very few exits. These are the safest, most convenient fuel stops along your route. Try not to let the tank drop below a quarter tank in rural sections.</p>
 
-      <div class="dir-label"><span>Heading North &mdash; Florida to South Carolina</span></div>
+      <div class="dir-label"><span>Heading North &mdash; Coral Springs, FL to Brunswick, GA (Day 1)</span></div>
 
       <div class="exp-card">
         <div class="exp-card-top">
-          <h3>St. Augustine, FL &mdash; Exit 318</h3>
-          <p>About 1.5 hours from Fort Lauderdale. Lots of gas stations and a great early rest stop. Grab coffee and a snack here before the long stretch through Georgia.</p>
+          <h3>St. Augustine, FL &mdash; Exit 318 (I-95)</h3>
+          <p>About 1.5 hours from Coral Springs. Lots of gas stations and a great early rest stop. Grab coffee and a snack here before the long stretch through Georgia.</p>
           <a href="https://www.google.com/maps/search/?api=1&query=gas+station+I-95+Exit+318+St+Augustine+FL" target="_blank" class="maps-btn">&#128205; Find Gas Here</a>
         </div>
       </div>
 
       <div class="exp-card">
         <div class="exp-card-top">
-          <h3>Kingsland / St. Marys, GA &mdash; Exit 3</h3>
-          <p>Right at the Florida-Georgia border. Good cluster of gas stations and fast food. A reliable fill-up point before crossing into Georgia, which has longer gaps between exits.</p>
+          <h3>Kingsland / St. Marys, GA &mdash; Exit 3 (I-95)</h3>
+          <p>Right at the Florida-Georgia border. Good cluster of gas stations and fast food. A reliable fill-up point before Brunswick — you're almost to the hotel!</p>
           <a href="https://www.google.com/maps/search/?api=1&query=gas+station+I-95+Exit+3+Kingsland+GA" target="_blank" class="maps-btn">&#128205; Find Gas Here</a>
         </div>
       </div>
 
+      <div class="dir-label"><span>Heading North &mdash; Brunswick, GA to Burnsville, NC (Day 2)</span></div>
+
       <div class="exp-card">
         <div class="exp-card-top">
-          <h3>Savannah, GA &mdash; Exit 94</h3>
-          <p>Savannah is the major hub about halfway through Georgia. Fuel up here &mdash; it is also a great bathroom break spot. Multiple stations right off the exit.</p>
+          <h3>Savannah, GA &mdash; Exit 94 (I-95)</h3>
+          <p>About 1.5 hours from Brunswick. Fill up here before leaving I-95 and heading inland and north toward the mountains. Multiple stations right off the exit.</p>
           <a href="https://www.google.com/maps/search/?api=1&query=gas+station+I-95+Exit+94+Savannah+GA" target="_blank" class="maps-btn">&#128205; Find Gas Here</a>
         </div>
       </div>
 
-      <div class="dir-label"><span>Near Your Overnight Stop &mdash; South Carolina</span></div>
-
       <div class="exp-card">
         <div class="exp-card-top">
-          <h3>Walterboro, SC &mdash; Exit 53 (Sniders Hwy)</h3>
-          <p>Multiple gas stations clustered right at this exit near the Hampton Inn. Easy in and out &mdash; fill up here before your overnight stay and again in the morning before heading north.</p>
-          <a href="https://www.google.com/maps/search/?api=1&query=gas+station+I-95+Exit+53+Walterboro+SC" target="_blank" class="maps-btn">&#128205; Find Gas Here</a>
+          <h3>Spartanburg, SC Area (I-26 / I-85 junction)</h3>
+          <p>A major fuel and rest stop before the mountain climb into NC. Fill up here — gas stations become less frequent as you head into the Blue Ridge Mountains toward Burnsville.</p>
+          <a href="https://www.google.com/maps/search/?api=1&query=gas+station+Spartanburg+SC+I-26" target="_blank" class="maps-btn">&#128205; Find Gas Here</a>
         </div>
       </div>
 
+      <div class="dir-label"><span>Near Your Overnight Stop &mdash; Brunswick, GA</span></div>
+
       <div class="exp-card">
         <div class="exp-card-top">
-          <h3>Santee, SC &mdash; Exit 98 (Hwy 6)</h3>
-          <p>If staying in Santee, this exit has several gas stations directly off the ramp. Convenient and well-lit &mdash; easy stop any time of day or night.</p>
-          <a href="https://www.google.com/maps/search/?api=1&query=gas+station+I-95+Exit+98+Santee+SC" target="_blank" class="maps-btn">&#128205; Find Gas Here</a>
+          <h3>Brunswick, GA &mdash; I-95 Exit 36 (US-17)</h3>
+          <p>Multiple gas stations clustered right at the Brunswick exits near your Holiday Inn Express. Easy in and out — fill up here before your overnight stay and again in the morning before heading north.</p>
+          <a href="https://www.google.com/maps/search/?api=1&query=gas+station+I-95+Exit+36+Brunswick+GA" target="_blank" class="maps-btn">&#128205; Find Gas Here</a>
         </div>
       </div>
 
@@ -588,7 +611,7 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.85rem}
             <li><span class="check-icon check-blue">✓</span>Comfortable pillows</li>
             <li><span class="check-icon check-blue">✓</span>Snacks & drinks for the car</li>
             <li><span class="check-icon check-blue">✓</span>Sunglasses</li>
-            <li><span class="check-icon check-blue">✓</span>Change of clothes (2 days)</li>
+            <li><span class="check-icon check-blue">✓</span>Change of clothes (4 days)</li>
             <li><span class="check-icon check-blue">✓</span>Toiletries bag</li>
             <li><span class="check-icon check-blue">✓</span>Camera or iPad for photos</li>
           </ul>
@@ -723,16 +746,16 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.85rem}
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;margin-bottom:1rem">
         <div class="info-box info-box-blue">
-          <h4>📞 Emergency Vet — Walterboro Area</h4>
-          <p><strong>Lowcountry Veterinary Urgent Care</strong><br>
-          Charleston, SC (40 min from Walterboro)<br>
-          <a href="tel:8435561955" class="phone-link">Call: (843) 556-1955</a></p>
+          <h4>📞 Emergency Vet — Brunswick, GA Area</h4>
+          <p><strong>Coastal Georgia Animal Emergency</strong><br>
+          Brunswick, GA<br>
+          <a href="https://www.google.com/maps/search/?api=1&query=emergency+vet+Brunswick+GA" class="phone-link">Search on Maps</a></p>
         </div>
         <div class="info-box info-box-blue">
-          <h4>📞 Emergency Vet — Santee Area</h4>
-          <p><strong>Palmetto Regional Animal Emergency</strong><br>
-          Orangeburg, SC (30 min from Santee)<br>
-          <a href="tel:8035360639" class="phone-link">Call: (803) 536-0639</a></p>
+          <h4>📞 Emergency Vet — Burnsville / Asheville NC</h4>
+          <p><strong>Carolina Veterinary Specialists</strong><br>
+          Asheville, NC (~45 min from Burnsville)<br>
+          <a href="https://www.google.com/maps/search/?api=1&query=emergency+vet+Asheville+NC" class="phone-link">Search on Maps</a></p>
         </div>
       </div>
 
@@ -755,11 +778,40 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.85rem}
     </div>
   </div>
 
+  <!-- SECTION 10: SHARE LOCATION + TRIP TRACKER -->
+  <div class="card" id="sec-tracker">
+    <div class="card-head">
+      <div class="card-icon" style="background:#e6f4ed;font-size:1.3rem">📍</div>
+      <div class="step-num">10</div>
+      <h2>Share Location &amp; Trip Tracker</h2>
+    </div>
+    <div class="card-body">
+
+      <!-- SHARE LOCATION -->
+      <div style="margin-bottom:1.5rem">
+        <div style="font-weight:700;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--blue);margin-bottom:0.6rem">📲 Share Where You Are</div>
+        <p style="color:var(--muted);font-size:0.9rem;margin-bottom:0.85rem">Tap the button — it gets your GPS location and opens your messages app with a Google Maps pin ready to send to anyone.</p>
+        <button id="share-loc-btn" onclick="shareLocation()" style="width:100%;padding:0.9rem;background:var(--blue);color:white;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;margin-bottom:0.5rem">📍 Share Our Location</button>
+        <div id="share-loc-status" style="font-size:0.88rem;min-height:1.2em;text-align:center"></div>
+      </div>
+
+      <!-- TRIP TRACKER -->
+      <div>
+        <div style="font-weight:700;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--green);margin-bottom:0.6rem">🚗 How Far to the Next Stop?</div>
+        <p style="color:var(--muted);font-size:0.9rem;margin-bottom:0.85rem">Tap Start — the app will use your GPS to show your distance and estimated time to each stop on the trip, updating as you drive.</p>
+        <button id="tracker-btn" onclick="startTracker()" style="width:100%;padding:0.9rem;background:var(--green);color:white;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;margin-bottom:0.5rem">🚗 Start Trip Tracker</button>
+        <div id="tracker-status" style="font-size:0.88rem;min-height:1.2em;color:var(--muted);text-align:center;margin-bottom:0.75rem"></div>
+        <div id="tracker-panel" style="display:none"></div>
+      </div>
+
+    </div>
+  </div>
+
 </div>
 
 <footer>
-  <p>🐾 Have a beautiful trip! Take lots of photos. 🐾</p>
-  <p style="margin-top:0.3rem;font-size:0.8rem">Made with love for Mom & Dad — Operation Puppy Brother 🎖️</p>
+  <p>🐾 Have a beautiful trip! Take lots of photos. Welcome home, Taylor! 🐾</p>
+  <p style="margin-top:0.3rem;font-size:0.8rem">Made with love — Operation Puppy Brother 🎖️ &nbsp;|&nbsp; Jun 2–6, 2025</p>
 </footer>
 
 <script>
@@ -781,17 +833,20 @@ function switchFoodTab(target) {
   document.getElementById('content-food-'+target).classList.add('active');
 }
 
-function launchRoute(stopover) {
-  var start = document.getElementById('start-addr').value.trim();
-  var end = document.getElementById('end-addr').value.trim();
-  if (!start || !end) {
-    alert('Please enter both your home address and the puppy pick-up address first.');
-    return;
-  }
+function launchRouteGoing() {
   var url = 'https://www.google.com/maps/dir/?api=1'
-    + '&origin=' + encodeURIComponent(start)
-    + '&destination=' + encodeURIComponent(end)
-    + '&waypoints=' + encodeURIComponent(stopover)
+    + '&origin=' + encodeURIComponent('Coral Springs, FL 33067')
+    + '&destination=' + encodeURIComponent('Bakersville, NC 28705')
+    + '&waypoints=' + encodeURIComponent('St. Cloud, FL 34771|Brunswick, GA 31520|Burnsville, NC 28714')
+    + '&travelmode=driving';
+  window.open(url, '_blank');
+}
+
+function launchRouteHome() {
+  var url = 'https://www.google.com/maps/dir/?api=1'
+    + '&origin=' + encodeURIComponent('Bakersville, NC 28705')
+    + '&destination=' + encodeURIComponent('Coral Springs, FL 33067')
+    + '&waypoints=' + encodeURIComponent('Brunswick, GA 31520')
     + '&travelmode=driving';
   window.open(url, '_blank');
 }
@@ -809,6 +864,147 @@ function downloadGuide() {
   a.download = 'Operation_Puppy_Brother_Guide.html';
   a.click();
   URL.revokeObjectURL(a.href);
+}
+
+// ── SHARE LOCATION ──────────────────────────────────────────────
+function shareLocation() {
+  var btn = document.getElementById('share-loc-btn');
+  var status = document.getElementById('share-loc-status');
+  if (!navigator.geolocation) {
+    status.textContent = 'Location not supported on this device.';
+    status.style.color = 'var(--red)';
+    return;
+  }
+  btn.textContent = '📡 Getting location…';
+  btn.disabled = true;
+  navigator.geolocation.getCurrentPosition(function(pos) {
+    var lat = pos.coords.latitude.toFixed(5);
+    var lng = pos.coords.longitude.toFixed(5);
+    var mapsUrl = 'https://maps.google.com/?q=' + lat + ',' + lng;
+    var smsBody = encodeURIComponent('📍 Here\'s where we are right now: ' + mapsUrl);
+    // Try SMS first (mobile), fall back to clipboard
+    var smsLink = 'sms:?body=' + smsBody;
+    // Also copy to clipboard as backup
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText('📍 Here\'s where we are: ' + mapsUrl).catch(function(){});
+    }
+    window.location.href = smsLink;
+    btn.textContent = '📍 Share Our Location';
+    btn.disabled = false;
+    status.innerHTML = '✅ Opening your messages app! <a href="' + mapsUrl + '" target="_blank" style="color:var(--blue);font-weight:600">See on map</a> &nbsp;·&nbsp; Also copied to clipboard.';
+    status.style.color = 'var(--green)';
+  }, function(err) {
+    btn.textContent = '📍 Share Our Location';
+    btn.disabled = false;
+    var msg = err.code === 1 ? 'Location permission denied. Please allow location access and try again.' : 'Could not get location. Please try again.';
+    status.textContent = msg;
+    status.style.color = 'var(--red)';
+  }, { timeout: 10000, enableHighAccuracy: true });
+}
+
+// ── TRIP TRACKER ─────────────────────────────────────────────────
+var STOPS = [
+  { name: 'Coral Springs, FL',     label: '🏠 Coral Springs (start)',      lat: 26.2707, lng: -80.2707 },
+  { name: "St. Cloud, FL",         label: "🏡 John's House — St. Cloud",   lat: 28.2489, lng: -81.2812 },
+  { name: 'Brunswick, GA',         label: '🌿 Brunswick, GA (Hotel)',       lat: 31.1499, lng: -81.4915 },
+  { name: 'Burnsville, NC',        label: '🏔️ Burnsville, NC (Hotel)',      lat: 35.9182, lng: -82.2946 },
+  { name: 'Bakersville, NC',       label: '🐶 Bakersville, NC (Taylor!)',   lat: 36.0149, lng: -82.1579 },
+  { name: 'Brunswick, GA (return)',label: '🌿 Brunswick, GA (Hotel again)', lat: 31.1499, lng: -81.4915 },
+  { name: 'Coral Springs, FL',     label: '🎉 Coral Springs — HOME!',       lat: 26.2707, lng: -80.2707 }
+];
+
+var trackerActive = false;
+var trackerWatchId = null;
+var userLat = null, userLng = null;
+
+function toRad(d) { return d * Math.PI / 180; }
+function distKm(lat1, lng1, lat2, lng2) {
+  var R = 6371;
+  var dLat = toRad(lat2 - lat1), dLng = toRad(lng2 - lng1);
+  var a = Math.sin(dLat/2)*Math.sin(dLat/2) + Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLng/2)*Math.sin(dLng/2);
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+function fmtDist(km) {
+  var mi = km * 0.621371;
+  return mi < 1 ? 'Less than 1 mile' : Math.round(mi) + ' miles';
+}
+function fmtTime(km) {
+  var hrs = km / 90; // ~90 km/h average highway speed
+  if (hrs < 1/60) return 'Arrived!';
+  if (hrs < 1) return Math.round(hrs * 60) + ' min';
+  var h = Math.floor(hrs), m = Math.round((hrs - h) * 60);
+  return h + ' hr' + (h>1?'s':'') + (m>0?' '+m+' min':'');
+}
+
+function findNextStop(lat, lng) {
+  // Find the stop we haven't passed yet (closest ahead)
+  var best = null, bestDist = Infinity;
+  for (var i = 1; i < STOPS.length; i++) {
+    var d = distKm(lat, lng, STOPS[i].lat, STOPS[i].lng);
+    if (d < bestDist) { bestDist = d; best = i; }
+  }
+  return { idx: best, dist: bestDist };
+}
+
+function startTracker() {
+  if (!navigator.geolocation) {
+    document.getElementById('tracker-status').textContent = 'Geolocation not supported on this device.';
+    return;
+  }
+  var btn = document.getElementById('tracker-btn');
+  if (trackerActive) {
+    navigator.geolocation.clearWatch(trackerWatchId);
+    trackerActive = false;
+    btn.textContent = '🚗 Start Trip Tracker';
+    btn.style.background = 'var(--blue)';
+    document.getElementById('tracker-panel').style.display = 'none';
+    document.getElementById('tracker-status').textContent = '';
+    return;
+  }
+  trackerActive = true;
+  btn.textContent = '⏹ Stop Tracker';
+  btn.style.background = '#c0392b';
+  document.getElementById('tracker-status').textContent = '📡 Getting your location…';
+  document.getElementById('tracker-panel').style.display = 'block';
+
+  trackerWatchId = navigator.geolocation.watchPosition(function(pos) {
+    userLat = pos.coords.latitude;
+    userLng = pos.coords.longitude;
+    updateTrackerUI(userLat, userLng);
+  }, function(err) {
+    document.getElementById('tracker-status').textContent = err.code === 1
+      ? '⚠️ Location permission denied. Please allow location access.' : '⚠️ Could not get location.';
+  }, { enableHighAccuracy: true, maximumAge: 30000, timeout: 15000 });
+}
+
+function updateTrackerUI(lat, lng) {
+  var result = findNextStop(lat, lng);
+  var stop = STOPS[result.idx];
+  var dist = result.dist;
+  var panel = document.getElementById('tracker-panel');
+
+  // Build stop list
+  var stopsHtml = '';
+  for (var i = 0; i < STOPS.length; i++) {
+    var d = distKm(lat, lng, STOPS[i].lat, STOPS[i].lng);
+    var isCurrent = i === result.idx;
+    var isPast = d < 10 && i < result.idx; // rough "already passed"
+    var bg = isCurrent ? 'background:var(--green-light);border:1px solid #b7deca;' : isPast ? 'background:#f0f0f0;border:1px solid #ddd;opacity:0.6;' : 'background:#f8fafc;border:1px solid var(--border);';
+    stopsHtml += '<div style="display:flex;align-items:center;gap:0.6rem;padding:0.5rem 0.75rem;border-radius:8px;' + bg + 'margin-bottom:0.4rem">';
+    if (isCurrent) stopsHtml += '<span style="font-size:1rem">👉</span>';
+    else stopsHtml += '<span style="font-size:1rem;opacity:0.4">·</span>';
+    stopsHtml += '<div style="flex:1;font-size:0.88rem"><strong>' + STOPS[i].label + '</strong>';
+    if (isCurrent) stopsHtml += '<br><span style="color:var(--green);font-weight:700">' + fmtDist(d) + ' away · ~' + fmtTime(d) + '</span>';
+    stopsHtml += '</div></div>';
+  }
+
+  panel.innerHTML = '<div style="font-weight:700;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--green);margin-bottom:0.75rem">📍 Next Stop: ' + stop.name + '</div>'
+    + '<div style="font-size:1.5rem;font-weight:800;color:var(--text);margin-bottom:0.2rem">' + fmtDist(dist) + '</div>'
+    + '<div style="font-size:1rem;color:var(--muted);margin-bottom:1rem">about <strong style="color:var(--text)">' + fmtTime(dist) + '</strong> away</div>'
+    + '<div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.85rem">Updates automatically as you drive</div>'
+    + stopsHtml;
+
+  document.getElementById('tracker-status').textContent = '';
 }
 </script>
 
